@@ -1,0 +1,102 @@
+{% extends '__base__.html' %}
+{% load staticfiles %}
+{% csrf_token %}
+
+
+{% block prijava %}
+{% if user.is_authenticated %}
+
+<a href = "{% url 'KmetApp:logOut' %}">Log Out </a>
+
+{% else %}
+<a href = "{% url 'KmetApp:prijava' %}">Prijava </a>
+</li>
+<li>
+<a href = "{% url 'KmetApp:reg' %}">Registracija</a>
+</li>
+</ul>
+{% endif %}
+{% endblock %}
+
+
+
+{% block hdr %}
+
+ <header class="intro-header" style="background-image: url({% static 'img/prijava-bg.jpg' %})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                    <div class="page-heading">
+                        <h1>Iskanje Oglasov</h1>
+                        <hr class="small">
+                        <span class="subheading">Tukaj lahko vsak poišče registriran oglas.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+<div ng-controller="MainController">
+
+	<form class="form-wrapper" name="IskanjeNarocila" ng-submit="iskanjeKosarice()">
+	    <input type="text" id="search" placeholder="Iskanje oglasov" ng-model="search.term">
+	    <input type="submit" id="submit">
+	</form>
+
+ 	<div class="oglasi">
+  		{% verbatim %}
+ 		<div class="container">
+          	
+          	<div class="item col-md-12 col-md-offset-3" ng-repeat="kosarica in kosarice" >
+	            <h3 class="name"> {{ kosarica.ime_K }} </h3>
+	            <ul>
+	            	<li class="price" name="cena_K">  Cena izdelka: {{ kosarica.cena_K }} €/kg</li>
+	           		<li class = "quantity" name="kolicina_K"> Kolicina: {{ kosarica.kolicina_K }} kg </li>
+	           		<li class = "description"> Opis: {{ kosarica.opis_K }}	</li>
+                <li class = "kolicina" > Stevilo košaric: {{ kosarica.stevilo_K }}</li>
+	           		
+	            </ul>	                       	
+            	<input id ="submit1" type="submit" ng-click="oglas_gumb($event)" data-oglas="{{ kosarica.id }}" data-toggle="modal" data-target="#myModal" >
+          	</div>
+        </div>
+        {% endverbatim %}
+    </div>
+		
+  
+
+<form method="POST" >
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Oddaja naročila za košarico</h4>
+      </div>
+      <div class="modal-body">
+      <ul>
+			     <li>Število košaric: <input type="integer" name="stevilo_K" id="stevilo_K"></li>
+           <li>Pogostost dostave košaric:  <input type="text" name="pogostost" id="pogostost"placeholder="npr. 1x na teden">
+      </div>
+
+      <div class="oglas_id" display:none id="oglas_id"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input  type="submit" class="btn btn-primary" data-dismiss="modal" ng-click= "narocilo_K()">
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</form>
+
+  </div>
+{% endblock %}
+
+
+ 
+
+
+

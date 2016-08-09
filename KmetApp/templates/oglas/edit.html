@@ -1,0 +1,91 @@
+{% extends '__base__.html' %}
+{% load staticfiles %}
+
+{% csrf_token %}
+
+{% block prijava %}
+{% if user.is_authenticated %}
+
+<a href = "{% url 'KmetApp:logOut' %}">Log Out </a>
+
+{% else %}
+<a href = "{% url 'KmetApp:prijava' %}">Prijava </a>
+</li>
+<li>
+<a href = "{% url 'KmetApp:reg' %}">Registracija</a>
+</li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block hdr %}
+
+ <header class="intro-header" style="background-image: url({% static 'img/prijava-bg.jpg' %})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                    <div class="page-heading">
+                        <h1>Moji oglasi</h1>
+                        <hr class="small">
+                        <span class="subheading">Spisek vaših oglasov</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+
+{% block content %}
+	
+	<div class="oglasi_E" ng-init="oglas()">
+  		{% verbatim %}
+ 		<div class="container">
+          	
+          	<div class="item col-md-12 col-md-offset-3" ng-repeat="oglasa in oglase" >
+	            <h3 class="name"> {{ oglasa.ime_O }} </h3>
+	            <ul>
+	            	<li class="price" name="cena_O">  Cena izdelka: {{ oglasa.cena_O }} €/kg</li>
+	           		<li class = "quantity" name="kolicina_O"> Kolicina: {{ oglasa.kolicina_O }} kg </li>
+	           		<li class = "description"> Opis: {{ oglasa.opis_O }}</li>
+	           		
+	            </ul>	                       	
+            	<button id ="submit1" type="submit" ng-click="narocilo($event)" data-oglas="{{ oglasa.oglas_id }}" data-toggle="modal" data-target="#myModal" >Popravek oglasa</button>
+              <button id = "submit1" data-oglas="{{ oglasa.oglas_id }}" ng-click="zakljuci_O($event)">Zaključek oglasa</button>
+          	</div>
+        </div>
+        {% endverbatim %}
+    </div>
+
+<form method="POST" >
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Popravek oglasa</h4>
+      </div>
+      <div class="modal-body">
+      			<ul>
+      				<li>Ime oglasa: <input type="text" name="ime_O" id="ime_O"></li>           
+	            	<li>Cena izdelka: <input type="integer" id ="cena_O">€/kg</li>
+	            	<li>Količina izdelka: <input type="integer" name="kolicina" id="kolicina_O"></li>
+	           		<li>Opis: <input type="text" id="opis_O"></li>
+	           	</ul>
+	         
+      </div>
+
+      <div class="oglas_id" display:none id="oglas_id"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input  type="submit" class="btn btn-primary" data-dismiss="modal" ng-click= "oglas_E()">
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</form>
+
+  </div>
+{% endblock %}

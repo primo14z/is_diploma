@@ -1,0 +1,98 @@
+{% extends '__base__.html' %}
+{% load staticfiles %}
+
+{% csrf_token %}
+
+
+
+{% block prijava %}
+{% if user.is_authenticated %}
+
+<a href = "{% url 'KmetApp:logOut' %}">Log Out </a>
+
+{% else %}
+<a href = "{% url 'KmetApp:prijava' %}">Prijava </a>
+</li>
+<li>
+<a href = "{% url 'KmetApp:reg' %}">Registracija</a>
+</li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block hdr %}
+
+ <header class="intro-header" style="background-image: url({% static 'img/prijava-bg.jpg' %})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                    <div class="page-heading">
+                        <h1>Moja Naročila</h1>
+                        <hr class="small">
+                        <span class="subheading">Spisek vaših naročil</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+
+{% block content %}
+  
+  
+  <div class="narocila_obdelana"  ng-init=narocilo_Obdelano()>
+      {% verbatim %}
+    <div class="container" >
+            
+            <div class="item col-md-12 col-md-offset-3" ng-repeat="narocilo in narocila" >
+              <h3 class="name"> {{ narocilo.oglas_ime }} </h3>
+              <ul>
+                <li class="price" name="cena_O">  Cena izdelka: {{ narocilo.cena_N_O }} €/kg</li>
+                <li class = "quantity" name="kolicina_O"> Kolicina: {{ narocilo.kolicina_N_O }} kg </li>
+                <li class = "description"> Opis: {{ narocilo.kupec_O_id }}</li>
+                
+              </ul>                         
+              <input id ="submit1" type="submit" ng-click="narocilo_gumb($event)" data-narocilo="{{ narocilo.narocilo_id }}" data-toggle="modal" data-target="#myModal" >
+            </div>
+        </div>
+        {% endverbatim %}
+    </div>
+
+  
+
+
+
+<form method="POST" >
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Obdelava naročila</h4>
+      </div>
+      <div class="modal-body">
+            <ul>
+              <li>Ime oglasa: <input type="text" name="ime_O" id="ime_O"></li>           
+                <li>Cena izdelka: <input type="integer" id ="cena_O">€/kg</li>
+                <li>Količina izdelka: <input type="integer" name="kolicina" id="kolicina_O"></li>
+                <li>Opis: <input type="text" id="opis_O"></li>
+              </ul>
+           
+      </div>
+
+      <div class="oglas_id" display:none id="oglas_id"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input  type="submit" class="btn btn-primary" data-dismiss="modal" ng-click= "oglas_E()">
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</form>
+
+ 
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends '__base__.html' %}
+
+{% block prijava %}
+{% if user.is_authenticated %}
+
+<a href = "{% url 'KmetApp:logOut' %}">Log Out </a>
+
+{% else %}
+<a href = "{% url 'KmetApp:prijava' %}">Prijava </a>
+</li>
+<li>
+<a href = "{% url 'KmetApp:reg' %}">Registracija</a>
+</li>
+</ul>
+{% endif %}
+{% endblock %}
+
+
+
+{% block content %}
+
+<h1>To je veseli kmet</h1>
+<p>To je moja vsebina.</p>
+
+{% endblock %}
+
+{% block ftr %}
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends '__base__.html' %}
+{% load staticfiles %}
+
+{% csrf_token %}
+
+
+{% block prijava %}
+{% if user.is_authenticated %}
+
+<a href = "{% url 'KmetApp:logOut' %}">Log Out </a>
+
+{% else %}
+<a href = "{% url 'KmetApp:prijava' %}">Prijava </a>
+</li>
+<li>
+<a href = "{% url 'KmetApp:reg' %}">Registracija</a>
+</li>
+</ul>
+{% endif %}
+{% endblock %}
+
+{% block hdr %}
+
+ <header class="intro-header" style="background-image: url({% static 'img/prijava-bg.jpg' %})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                    <div class="page-heading">
+                        <h1>Moja Naročila</h1>
+                        <hr class="small">
+                        <span class="subheading">Spisek vaših naročil</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+
+{% block content %}
+  
+ 
+  <div class="narocila Ne-Obdelana" ng-init=narocilo_N()>
+      {% verbatim %}
+    <div class="container" >
+            
+            <div class="item col-md-12 col-md-offset-3" ng-repeat="narocilo in narocila" >
+              <h3 class="name"> {{ narocilo.oglas_ime }} </h3>
+              <ul>
+                <li class="price" name="cena_O">  Cena izdelka: {{ narocilo.cena_N_O }} €/kg</li>
+                <li class = "quantity" name="kolicina_O"> Kolicina: {{ narocilo.kolicina_N_O }} kg </li>
+                <li class = "description"> Opis: {{ narocilo.kupec_O_id }}</li>
+                
+              </ul>                         
+              <button id ="submit1" type="submit" ng-click="narocilo_gumb($event)" data-narocilo="{{ narocilo.narocilo_id }}" data-toggle="modal" data-target="#myModal" >Zaključi naročilo </button>
+            </div>
+        </div>
+        {% endverbatim %}
+    </div>
+    </div>
+
+  
+
+{% endblock %}
