@@ -4,16 +4,80 @@
 		"selected_items":
 		[
 			[
+				"box",
+				"box-shadow"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"col",
+				"color"
+			],
+			[
+				"backgr",
+				"background-size"
+			],
+			[
+				"C",
+				"CharField"
+			],
+			[
+				"re",
+				"request"
+			],
+			[
+				"pogos",
+				"pogostost_dostave_K"
+			],
+			[
+				"narocilo_O",
+				"narocilo_Obdelano"
+			],
+			[
+				"obd",
+				"obdelano_N_O"
+			],
+			[
+				"prodajalec",
+				"prodajalec_O_id"
+			],
+			[
+				"ko",
+				"kosarica_K_id"
+			],
+			[
+				"stevi",
+				"stevilo_K_N"
+			],
+			[
+				"kosa",
+				"kosarica"
+			],
+			[
+				"pogo",
+				"pogostost_dostave_K"
+			],
+			[
+				"de",
+				"default"
+			],
+			[
+				"datum",
+				"datum_N_O_obdelano"
+			],
+			[
+				"narocila",
+				"narocila_K_N"
+			],
+			[
 				"pro",
 				"prodajalec_K"
 			],
 			[
 				"ob",
 				"objects"
-			],
-			[
-				"re",
-				"request"
 			],
 			[
 				"ime",
@@ -58,10 +122,6 @@
 			[
 				"da",
 				"datum_N_O"
-			],
-			[
-				"ko",
-				"kolicina_N_O"
 			],
 			[
 				"u",
@@ -124,10 +184,6 @@
 				"body"
 			],
 			[
-				"de",
-				"decode"
-			],
-			[
 				"d",
 				"document"
 			],
@@ -180,10 +236,6 @@
 				"formaction	Attr"
 			],
 			[
-				"bac",
-				"background-color"
-			],
-			[
 				"q",
 				"question_text"
 			]
@@ -192,10 +244,13 @@
 	"buffers":
 	[
 		{
+			"contents": "from django.conf.urls import url, include\nfrom django.contrib import admin\nfrom . import views\n\n\napp_name='KmetApp'\n\nurlpatterns = [\n    url(r'^home/', views.home, name='home'),\n    url(r'^prijava/', views.prijava , name='prijava'),\n    url(r'^logIn/', views.logIn , name='logIn'),\n    url(r'^logOut/', views.logOut , name='logOut'),\n    url(r'^registracija/', views.registracija , name='registracija'),\n    url(r'^reg/', views.reg , name='reg'),\n    url(r'^oglas/', views.oglas , name='oglas'),\n    url(r'^oddaja_O/', views.oddaja_O , name='oddaja_O'),\n    url(r'^iskanje_O/', views.iskanje_O , name='iskanje_O'),\n    url(r'^oglas_O/', views.oglas_O , name='oglas_O'),\n    url(r'^narocilo_O/', views.narocilo_O , name='narocilo_O'),\n   	url(r'^oglas_M/', views.oglas_M , name='oglas_M'),\n   	url(r'^oglas_Edit/', views.oglas_Edit , name='oglas_Edit'),\n   	url(r'^oglas_E/', views.oglas_E , name='oglas_E'),\n    url(r'^narocilo/', views.narocilo , name='narocilo'),\n    url(r'^narocilo_IO/', views.narocilo_IO , name='narocilo_IO'),\n    url(r'^narocilo_E/', views.narocilo_E , name='narocilo_E'),\n	url(r'^narocila_N/', views.narocila_N , name='narocila_N'),\n	url(r'^narocila_M/', views.narocila_M , name='narocila_M'),	\n	url(r'^obdelaj_N/', views.obdelaj_N , name='obdelaj_N'),\n	url(r'^zakljuci_O/', views.zakljuci_O , name='zakljuci_O'),\n	url(r'^kosarica/', views.kosarica , name='kosarica'),\n	url(r'^oddaja_K/', views.oddaja_K , name='oddaja_K'),\n	url(r'^kosarica_O/', views.kosarica_O , name='kosarica_O'),\n	url(r'^iskanje_K/', views.iskanje_K , name='iskanje_K'),\n	url(r'^kosarica_E/', views.kosarica_E , name='kosarica_E'),\n	url(r'^kosarica_M/', views.kosarica_M , name='kosarica_M'),\n	url(r'^narocila_K_N/', views.narocila_K_N , name='narocila_K_N'),\n	url(r'^narocila_K_NE/', views.narocila_K_NE , name='narocila_K_NE'),\n	url(r'^narocilo_K_O/', views.narocilo_K_O , name='narocilo_K_O'),\n	url(r'^narocila_K_M/', views.narocila_K_M , name='narocila_K_M'),\n	url(r'^obdelaj_K_N/', views.obdelaj_K_N , name='obdelaj_K_N'),\n	url(r'^narocilo_Obdelano/', views.narocilo_Obdelano , name='narocilo_Obdelano'),\n	url(r'^narocila_K_Moja/', views.narocila_K_Moja , name='narocila_K_Moja'),\n	url(r'^narocila_K_O/', views.narocila_K_O , name='narocila_K_O'),\n	url(r'^narocila_K_obdelana/' , views.narocila_K_obdelana , name='narocila_K_obdelana'),\n	url(r'^Edit/', views.Edit, name='Edit'),\n	url(r'^popraviPodatke/' , views.popraviPodatke , name='popraviPodatke')\n]\n\n",
 			"file": "KmetApp/urls.py",
+			"file_size": 2507,
+			"file_write_time": 131158427424900579,
 			"settings":
 			{
-				"buffer_size": 1691,
+				"buffer_size": 2457,
 				"line_ending": "Windows"
 			}
 		},
@@ -208,45 +263,35 @@
 			}
 		},
 		{
-			"file": "KmetApp/views.py",
+			"file": "KmetSite/urls.py",
 			"settings":
 			{
-				"buffer_size": 7773,
+				"buffer_size": 841,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "KmetApp/static/js/controllers/MainController.js",
+			"file": "KmetApp/models.py",
 			"settings":
 			{
-				"buffer_size": 4675,
+				"buffer_size": 3477,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "KmetApp/views.py",
+			"settings":
+			{
+				"buffer_size": 12362,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "KmetApp/templates/oglas/index.html",
+			"settings":
+			{
+				"buffer_size": 3150,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "KmetApp/templates/__base__.html",
-			"settings":
-			{
-				"buffer_size": 7438,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "KmetApp/templates/kosarica/index.html",
-			"settings":
-			{
-				"buffer_size": 2809,
-				"line_ending": "Windows",
-				"name": "index.html"
-			}
-		},
-		{
-			"file": "KmetApp/templates/kosarica/edit_K.html",
-			"settings":
-			{
-				"buffer_size": 2825,
-				"line_ending": "Windows",
-				"name": "edit_K.html"
 			}
 		}
 	],
@@ -307,38 +352,56 @@
 		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static",
 		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/css",
 		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/accounts",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/kosarica",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/narocilo",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/oglas",
 		"/C/virtualenvs/Diploma/Diplomska/KmetSite"
 	],
 	"file_history":
 	[
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/oglas/edit.html",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/kosarica/add_K.html",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/js/app.js",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/narocilo/index_M.html",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/narocilo/index_O.html",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/narocilo/index_N.html",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/models.py",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/js/controllers/MainController.js",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/oglas/index.html",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/__base__.html",
-		"/E/Downloads/Movies/MAK.Kljuci.Windows.7.8.8.1.10.Office.2010.2013.2016-ERiKC3000/MAK Kljuci 29.5.2016 - ERiKC3000.txt",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/css/main.css",
+		"/C/Users/Primo Babi/Documents/Projekt/Projekt.asm",
+		"/E/Downloads/Movies/Borderlands Pre Sequel repack Mr DJ/Instructions.txt",
+		"/C/Users/Primo Babi/AppData/Local/Temp/7zO8310C33B/build.prop",
 		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/oglas/add.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/oglas/edit.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/oglas/index.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/accounts/login.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/narocilo/index_N.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/narocilo/index_O.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/narocilo_K/index_M.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/narocilo_K/index_N.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/narocilo_K/index_O.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/narocilo/index_M.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/kosarica/edit_K.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/kosarica/index.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/kosarica/add_K.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/accounts/edit.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/__base__.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/css/bootstrap.min.css",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/index.html",
+		"/E/Downloads/Movies/Ashampoo Snap 2017 1.0.1 + Serial by MaSTeR/serial.txt",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/css/main.css",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/css/clean-blog.min.css",
+		"/C/xampp/htdocs/site/index.html",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/css/bootstrap.css",
+		"/C/xampp/htdocs/site/css/bootstrap.css",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/css/clean-blog.css",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/css/img.css",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/js/controllers/MainController.js",
+		"/C/Users/Primo Babi/AppData/Local/Temp/7zO0BF26DBF/projekt_sis1.asm",
+		"/E/Games/No Man's Sky/Binaries/SETTINGS/TKGRAPHICSSETTINGS.MXML",
+		"/C/Users/Primo Babi/Desktop/PokeAuto/mmlog.txt",
+		"/C/Python35/TITLE PokemonGo-Bot Installer.bat",
+		"/C/Users/Primo Babi/Desktop/VlasckPepper",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/accounts/registration.html",
 		"/C/virtualenvs/Diploma/Diplomska/KmetApp/views.py",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/models.py",
+		"/C/virtualenvs/Diploma/Diplomska/KmetSite/settings.py",
+		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/js/app.js",
+		"/E/Downloads/Movies/MAK.Kljuci.Windows.7.8.8.1.10.Office.2010.2013.2016-ERiKC3000/MAK Kljuci 29.5.2016 - ERiKC3000.txt",
 		"/C/virtualenvs/Diploma/Diplomska/FullText.py",
 		"/C/virtualenvs/Diploma/Diplomska/KmetApp/FullText.py",
 		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/js/vendor/angular.min.js",
-		"/C/virtualenvs/Diploma/Diplomska/KmetSite/settings.py",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/index.html",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/accounts/login.html",
 		"/C/virtualenvs/Diploma/Diplomska/KmetSite/__init__.py",
 		"/C/virtualenvs/mysite/polls/models.py",
 		"/C/virtualenvs/Neki neki.txt",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates/accounts/registration.html",
 		"/C/virtualenvs/patrik/patrik/KmetApp/models.py",
 		"/C/Users/Primo Babi/Documents/Diplomska/registracija.html",
 		"/C/virtualenvs/Diploma/Diplomska/KmetSite/urls.py",
@@ -379,6 +442,25 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"EOR",
+			"navbar-colapse",
+			"active",
+			"dropdown-menu",
+			"bs-example-navbar-collapse-1",
+			"margin-top",
+			"site-heading",
+			".intro",
+			"intro-",
+			"narocilo_IO",
+			"narocilo_",
+			"def",
+			"2",
+			"narocila_K_obdelana",
+			"narocila_K_O",
+			"ž",
+			"narocilo_O",
+			"kosarica",
+			"kosarica_M",
 			"kosarica",
 			"contains",
 			"oglas",
@@ -412,7 +494,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -421,15 +503,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1691,
+						"buffer_size": 2457,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1346,
-								1354
+								141,
+								141
 							]
 						],
 						"settings":
@@ -456,8 +538,8 @@
 						"selection":
 						[
 							[
-								1066,
-								1066
+								1527,
+								1523
 							]
 						],
 						"settings":
@@ -467,27 +549,85 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 405.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "KmetApp/views.py",
+					"file": "KmetSite/urls.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7773,
+						"buffer_size": 841,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2171,
-								2177
+								783,
+								788
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "KmetApp/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3477,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2819,
+								2819
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 514.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "KmetApp/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 12362,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4283,
+								4283
 							]
 						],
 						"settings":
@@ -496,98 +636,31 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 720.0,
+						"translation.y": 1980.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "KmetApp/static/js/controllers/MainController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4675,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								732,
-								740
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 4,
-					"file": "KmetApp/templates/__base__.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7438,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3983,
-								3993
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 795.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
 					"buffer": 5,
-					"file": "KmetApp/templates/kosarica/index.html",
+					"file": "KmetApp/templates/oglas/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2809,
+						"buffer_size": 3150,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1000,
-								1000
+								1915,
+								1915
 							]
 						],
 						"settings":
 						{
-							"auto_name": "index.html",
 							"syntax": "Packages/HTML/HTML.sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
@@ -596,38 +669,14 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "KmetApp/templates/kosarica/edit_K.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2825,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1724,
-								1724
-							]
-						],
-						"settings":
-						{
-							"auto_name": "edit_K.html",
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 5,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -659,7 +708,7 @@
 		"cols":
 		[
 			0.0,
-			0.471782996554,
+			0.536033609883,
 			1.0
 		],
 		"rows":
@@ -711,7 +760,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -719,7 +768,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 172.0,
+	"side_bar_width": 213.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

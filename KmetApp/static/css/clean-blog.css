@@ -136,11 +136,12 @@ hr.small {
   background-color: #808080;
   background: no-repeat center center;
   background-attachment: scroll;
-  -webkit-background-size: cover;
+  -webkit-background-size: auto;
   -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
+  background-size: auto;
+  -o-background-size: auto;
   margin-bottom: 50px;
+  margin-top :0px;
 }
 .intro-header .site-heading,
 .intro-header .post-heading,

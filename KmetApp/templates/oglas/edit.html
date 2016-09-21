@@ -2,20 +2,25 @@
 {% load staticfiles %}
 
 {% csrf_token %}
-
 {% block prijava %}
-{% if user.is_authenticated %}
 
+ <ul class = "nav navbar-nav navbar-left">
+    
+{% if user.is_authenticated %}
+<li>
 <a href = "{% url 'KmetApp:logOut' %}">Log Out </a>
 
 {% else %}
+<li>
 <a href = "{% url 'KmetApp:prijava' %}">Prijava </a>
-</li>
+
 <li>
 <a href = "{% url 'KmetApp:reg' %}">Registracija</a>
-</li>
-</ul>
+
+
+
 {% endif %}
+</ul>
 {% endblock %}
 
 {% block hdr %}

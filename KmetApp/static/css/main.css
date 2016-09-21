@@ -1,8 +1,3 @@
-body, html {
-    background: url(bg.jpg);
-    background-size: 110px 69px;
-    font-family: 'Playfair Display', serif;
-}
 
 body p {
     font-style: italic;
@@ -21,6 +16,24 @@ body p {
     z-index: 10;
     
 }
+.navbar-nav > li > .dropdown-menu {
+  margin-top: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  background-color: white;
+  border: none;
+  box-shadow: none;
+
+}
+
+.navbar-nav > li > .dropdown-menu > ul{
+  list-style-type: none;
+  padding-left: 0;
+  padding-right: 30px;
+}
+
+
+
 
 .header h1 span {
     color:#fff;
@@ -178,7 +191,7 @@ a {
 @import "font-awesome-ie7.min.css";
 /* Space out content a bit */
 body {
-  padding-top: 20px;
+ 
   padding-bottom: 20px;
 }
 

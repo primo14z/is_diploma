@@ -4,22 +4,26 @@
 {% csrf_token %}
 
 
-
 {% block prijava %}
-{% if user.is_authenticated %}
 
+ <ul class = "nav navbar-nav navbar-left">
+    
+{% if user.is_authenticated %}
+<li>
 <a href = "{% url 'KmetApp:logOut' %}">Log Out </a>
 
 {% else %}
+<li>
 <a href = "{% url 'KmetApp:prijava' %}">Prijava </a>
-</li>
+
 <li>
 <a href = "{% url 'KmetApp:reg' %}">Registracija</a>
-</li>
-</ul>
-{% endif %}
-{% endblock %}
 
+
+
+{% endif %}
+</ul>
+{% endblock %}
 {% block hdr %}
 
  <header class="intro-header" style="background-image: url({% static 'img/prijava-bg.jpg' %})">

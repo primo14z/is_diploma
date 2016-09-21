@@ -151,7 +151,7 @@ def iskanje_O(request):
 		iskanje = Oglas.objects.filter(ime_O__icontains= body['term']).exclude(kolicina_O =0).exclude(aktiven_O = False).exclude(prodajalec_O_id=request.user )
 	else:
 		iskanje = Oglas.objects.filter(ime_O__icontains= body['term']).exclude(kolicina_O =0).exclude(aktiven_O = False)
-	data = [{"ime_O": ogl.ime_O, "cena_O": ogl.cena_O, "kolicina_O": ogl.kolicina_O , "opis_O": ogl.opis_O , "oglas_id" : ogl.id} for ogl in iskanje]
+	data = [{"ime_O": ogl.ime_O, "cena_O": ogl.cena_O, "kolicina_O": ogl.kolicina_O , "opis_O": ogl.opis_O , "oglas_id" : ogl.id } for ogl in iskanje]
 	return JsonResponse({ "oglasi" : data })
 
 @csrf_exempt
@@ -259,15 +259,7 @@ def narocila_K_NE(request):
 	return JsonResponse({"narocila" : data})
 
 
-@csrf_exempt
-def narocila_O(request):
-	uporabnik = request.user.id
-	
-	narocilo=Narocilo_O.objects.filter(oglas_O_id = uporabnik).order_by('datum_N_O')
 
-	data = [{"cena_N_O": nar.cena_N_O, "kolicina_N_O": nar.kolicina_N_O, "obdelano_N_O": nar.obdelano_N_O , "datum_N_O": nar.datum_N_O , "narocilo_id" : nar.id , "kupec_O_id" : User.objects.values("ime").get(id = nar.kupec_O_id)["ime"], "oglas_O_id" : nar.oglas_O_id , "oglas_ime" : Oglas.objects.values("ime_O").get(id = nar.oglas_O_id)["ime_O"]  } for nar in narocilo]
-
-	return JsonResponse({"narocila" : data})
 
 @csrf_exempt
 def narocila_M(request):
@@ -330,7 +322,7 @@ def kosarica_M(request):
 @csrf_exempt
 def narocilo_Obdelano(request):
 	user = request.user.id
-	narocila = Narocilo_O.objects.filter(oglas_O_id__prodajalec_O_id = user).exclude(obdelano_N_O = 0)
+	narocila = Narocilo_O.objects.filter(oglas_O_id__prodajalec_O_id = user).exclude(obdelano_N_O = 1)
 	data = [{"cena_N_O": nar.cena_N_O, "kolicina_N_O": nar.kolicina_N_O, "obdelano_N_O": nar.obdelano_N_O , "datum_N_O": nar.datum_N_O , "narocilo_id" : nar.id , "kupec_O_id" : User.objects.values("ime").get(id = nar.kupec_O_id)["ime"], "oglas_O_id" : nar.oglas_O_id , "oglas_ime" : Oglas.objects.values("ime_O").get(id = nar.oglas_O_id)["ime_O"]  } for nar in narocila]
 	return JsonResponse({"narocila" : data})
 

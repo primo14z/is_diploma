@@ -45,10 +45,11 @@ template {
 a {
   background-color: transparent;
 }
-a:active,
-a:hover {
-  outline: 0;
-}
+a:active {
+  background: transparent;
+  text-decoration: none;
+
+
 abbr[title] {
   border-bottom: 1px dotted;
 }

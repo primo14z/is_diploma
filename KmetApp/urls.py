@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^narocilo_E/', views.narocilo_E , name='narocilo_E'),
 	url(r'^narocila_N/', views.narocila_N , name='narocila_N'),
 	url(r'^narocila_M/', views.narocila_M , name='narocila_M'),
-	url(r'^narocila_O/', views.narocila_O , name='narocila_O'),
+	
 	url(r'^obdelaj_N/', views.obdelaj_N , name='obdelaj_N'),
 	url(r'^zakljuci_O/', views.zakljuci_O , name='zakljuci_O'),
 	url(r'^kosarica/', views.kosarica , name='kosarica'),

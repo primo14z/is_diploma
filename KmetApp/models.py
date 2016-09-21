@@ -87,3 +87,12 @@ class Narocilo_K(models.Model):
     kosarica_K =models.ForeignKey(Kosarica, id)
     kupec_K = models.ForeignKey(User , id)
     obdelano_N_K = models.BooleanField(default = False)
+
+class Novica(models.Model):
+    naslov_Novica = models.CharField(max_length = 100)
+    opis_Novica = models.CharField(max_length = 50000)
+    datum_objave = models.DateTimeField(default= None, blank= True)
+
+class Priloga(models.Model):
+    slika = models.BinaryField()
+    novica_id = models.ForeignKey(Novica , id)

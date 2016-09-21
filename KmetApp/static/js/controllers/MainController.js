@@ -288,8 +288,6 @@ $scope.narocilo_K=function(){
 
     };
 
-    
-
 
 }]);
 
