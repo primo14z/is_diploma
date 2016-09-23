@@ -1,9 +1,9 @@
-app.controller('MainController', ['$scope' ,'$http', '$route',   function($scope, $http,$route ){
+app.controller('MainController', ['$scope' ,'$http', '$route',   function($scope, $http,$route){
 
 	$scope.search = {};	
 	
 
-	$scope.iskanjeOglasa=function(){
+	$scope.iskanjeOglasa=function(){ //funkcija ki pošlje AJAX request s iskalno besedo in dobi nazaj spisek oglasov
 		$http.post("http://localhost:8000/app/iskanje_O/", $scope.search)
 		.then(function(response) {
 
@@ -17,7 +17,7 @@ app.controller('MainController', ['$scope' ,'$http', '$route',   function($scope
 	};
 
 
-    $scope.iskanjeKosarice=function(){
+    $scope.iskanjeKosarice=function(){//funkcija pošlje AJAX request s iskalno besedo in dobi nazaj JSON spisek košaric
         $http.post("http://localhost:8000/app/iskanje_K/", $scope.search)
         .then(function(response) {
 
@@ -30,7 +30,7 @@ app.controller('MainController', ['$scope' ,'$http', '$route',   function($scope
         });
     };
 
-    $scope.kosarica=function(){
+    $scope.kosarica=function(){//pošlje AJAX request za vse košarice katere je oddal user in niso bile še zaključene
          $http.post("http://localhost:8000/app/kosarica_M/")
         .then(function(response) {
 
@@ -45,14 +45,15 @@ app.controller('MainController', ['$scope' ,'$http', '$route',   function($scope
 
 
 
-	$scope.oglas_gumb = function(e){
+	$scope.oglas_gumb = function(e){//funkcija pridobi ID oglasa za katerega smo hoteli oddati naročilo
 
         var oglas_id = angular.element(e.target).attr('data-oglas');
         $scope.oglasID = parseInt(oglas_id);
        				
               };
 
-    $scope.zakljuci_O = function(e){
+    $scope.zakljuci_O = function(e){/*funkcija pridobi ID oglasa katerega želimo zaključiti, ter pošlje AJAX request v katerem 
+                                    posreduje ID oglasa in ga zaključi */
         var oglas_id = angular.element(e.target).attr('data-oglas');
 
           $http.post("http://localhost:8000/app/zakljuci_O/", oglas_id)
@@ -69,7 +70,8 @@ app.controller('MainController', ['$scope' ,'$http', '$route',   function($scope
 
    
 
-    $scope.narocilo_I=function(){
+    $scope.narocilo_I=function(){/*funkcija pridobi ID oglasa ter količino katero smo vnesli ob oddaji naročila, ter posreduje view
+                                 kateri vnese v bazo*/
     	var kolicina = parseInt(angular.element(document.querySelector('#kolicina')).val());
     	
        	var narocilo = {
@@ -92,7 +94,8 @@ app.controller('MainController', ['$scope' ,'$http', '$route',   function($scope
 
               	};
 
-$scope.narocilo_K=function(){
+$scope.narocilo_K=function(){/*funkcija dobi ID ter količino katero smo vnesli ob oddaji naročila za košarico, ter posreduje view kateri 
+                            vnese v bazo */
         var stevilo_K = parseInt(angular.element(document.querySelector('#stevilo_K')).val());
         var pogostost = angular.element(document.querySelector('#pogostost')).val();
 
@@ -117,10 +120,9 @@ $scope.narocilo_K=function(){
                 };
 
 
-    $scope.oglas = function(){
-    	$scope.oglase = {};
-		
-    	
+    $scope.oglas = function(){/*pošlje AJAX request za pridobitev oglasov oddanih od uporabnika, prejme jih v JSON formatu */
+      	$scope.oglase = {};
+	  	
     	$http.post("http://localhost:8000/app/oglas_Edit/")
     	.then(function(response){
     		
@@ -137,7 +139,9 @@ $scope.narocilo_K=function(){
 
    
 
-    $scope.oglas_E = function(){
+    $scope.oglas_E = function(){/* prejme podatke s katerimi želi uporabnik popraviti obstoječi oglas
+                                jih shrani spremenljivke ter posreduje v vie, kateri jih shrani v bazo */
+
     	var kolicina = parseInt(angular.element(document.querySelector('#kolicina_O')).val());
     	var ime =angular.element(document.querySelector('#ime_O')).val();
     	var cena = parseInt(angular.element(document.querySelector('#cena_O')).val());
@@ -166,7 +170,8 @@ $scope.narocilo_K=function(){
 
    
 
-    $scope.narocilo_N= function(){
+    $scope.narocilo_N= function(){//funckija pošlje AJAX request s katerim dobi podatke v JSON formatu, podatki 
+                                //so vsa neobdelana naročila na obstoječi oglas, kjer je uporabnik prodajalec
     	$scope.narocila = {};
     	$http.post("http://localhost:8000/app/narocila_N/")
     	.then(function(response){
@@ -179,7 +184,8 @@ $scope.narocilo_K=function(){
     };
 
 
-    $scope.narocilo_K_N = function(){
+    $scope.narocilo_K_N = function(){//funckija pošlje AJAX request s katerim dobi podatke v JSON formatu, podatki 
+                                //so vsa neobdelana naročila na obstoječo košarico, kjer je uporabnik prodajalec
         $scope.narocila = {};
         $http.post("http://localhost:8000/app/narocila_K_NE/")
         .then(function(response){
@@ -194,7 +200,8 @@ $scope.narocilo_K=function(){
     };
 
 
-	$scope.narocilo_gumb = function(e){
+	$scope.narocilo_gumb = function(e){/*funkcija pridobi ID naročila, katerega uporabnik želi zaključiti, S AJAX requestom ta ID 
+                                        posreduje View kateri na podlagi tega ID spremeni vrednost v bazi */
 
         var narocilo_id = angular.element(e.target).attr('data-narocilo');
         $scope.narociloID = parseInt(narocilo_id);
@@ -210,7 +217,8 @@ $scope.narocilo_K=function(){
        				
               };
 
-    $scope.narocilo_gumb_K= function(e){
+    $scope.narocilo_gumb_K= function(e){/*funkcija pridobi ID naročila, katerega uporabnik želi zaključiti, S AJAX requestom ta ID 
+                                        posreduje View kateri na podlagi tega ID spremeni vrednost v bazi */
         var narocilo_id = angular.element(e.target).attr('data-narocilo');
         $scope.narociloID = parseInt(narocilo_id);
         
@@ -223,12 +231,10 @@ $scope.narocilo_K=function(){
                 console.log("shit");
             });
                     
-              };
+              };    
 
     
-
-    
-    $scope.narocilo_M= function(){
+    $scope.narocilo_M= function(){//Ajax Request za spisek vseh naročil katere je uporabnik oddal za oglas
         $scope.narocila = {};
         
         $http.post("http://localhost:8000/app/narocila_M/")
@@ -243,7 +249,7 @@ $scope.narocilo_K=function(){
     };
 
 
-    $scope.narocilo_Obdelano = function(){
+    $scope.narocilo_Obdelano = function(){//Ajax request za spisek vseh naročil katera so bila obdelana in je user prodajalec
 
         $http.post("http://localhost:8000/app/narocilo_Obdelano/")
         .then(function(response){
@@ -254,10 +260,9 @@ $scope.narocilo_K=function(){
         }, function(response){
                 console.log("shit");
             });
-
-
     };
-   $scope.narocilo_K_Moja= function(){
+
+   $scope.narocilo_K_Moja= function(){//Ajax Request za spisek vseh naročil katere je uporabnik oddal za košarico
         $scope.narocila = {};
         
         $http.post("http://localhost:8000/app/narocila_K_Moja/")
@@ -272,7 +277,7 @@ $scope.narocilo_K=function(){
     };
 
 
-    $scope.narocila_K_obdelana = function(){
+    $scope.narocila_K_obdelana = function(){//Ajax request za spisek vseh naročil katera so bila obdelana in je user prodajalec-->Košarica
 
          $scope.narocila = {};
         
@@ -285,14 +290,7 @@ $scope.narocilo_K=function(){
         }, function(response){
                 console.log("shit");
             });
+    };//narocila_K_obdelana
 
-    };
-
-
+ 
 }]);
-
-
-
-
-
-

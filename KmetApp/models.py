@@ -60,6 +60,7 @@ class Oglas(models.Model):
     datum_O=models.DateTimeField(default=datetime.now, blank=True)
     prodajalec_O = models.ForeignKey(User , id)
     aktiven_O = models.BooleanField(default = True)
+    
 
 class Narocilo_O(models.Model):
     cena_N_O = models.IntegerField()
