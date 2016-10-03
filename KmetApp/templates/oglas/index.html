@@ -44,7 +44,7 @@
 {% endblock %}
 
 {% block content %}
-<div ng-controller="MainController">
+<div ng-app = "KmetApp" ng-controller="MainController">
 
 	<form class="form-wrapper" name="IskanjeOglasa" ng-submit="iskanjeOglasa()">
 	    <input type="text" id="search" placeholder="Iskanje oglasov" ng-model="search.term">
@@ -56,7 +56,8 @@
  		<div class="container">
           	
           	<div class="item col-md-12 col-md-offset-3" ng-repeat="oglas in oglasi" >
-	            <h3 class="name"> {{ oglas.ime_O }} </h3>
+	            <h3 class="name"><a ng-href="http://localhost:8000/app/oglas_view/{{hash}}" >{{ oglas.ime_O }} </a>
+              </h3>
 	            <ul>
 	            	<li class="price" name="cena_O">  Cena izdelka: {{ oglas.cena_O }} €/kg</li>
 	           		<li class = "quantity" name="kolicina_O"> Kolicina: {{ oglas.kolicina_O }} kg </li>

@@ -1,0 +1,99 @@
+{% extends '__base__.html' %}
+{% load staticfiles %}
+
+{% block prijava %}
+
+ <ul class = "nav navbar-nav navbar-left">
+    
+{% if user.is_authenticated %}
+<li>
+<a href = "{% url 'KmetApp:logOut' %}">Log Out </a>
+
+{% else %}
+<li>
+<a href = "{% url 'KmetApp:prijava' %}">Prijava </a>
+
+<li>
+<a href = "{% url 'KmetApp:reg' %}">Registracija</a>
+
+
+
+{% endif %}
+</ul>
+{% endblock %}
+
+
+
+{% block hdr %}
+    <header class="intro-header" style="background-image: url({% static 'img/prijava-bg.jpg' %})">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="page-heading">
+                        <h1>Urejanje profila</h1>
+                        <hr class="small">
+                        <span class="subheading">Tukaj se lahko vsak uporabnik popravi svoje podatke.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
+{% block content %}
+ <!-- Main Content -->
+    <div class="container">
+    <div class="col-lg-12 well">
+	<div class= "row"> 
+		    	
+		<form action="{% url 'KmetApp:popraviPodatke' %}" method = "POST" >
+		{% csrf_token %}
+			<div class="col-sm-12">
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<label>Geslo</label>	
+						<input type="password" name="password" placeholder="Password" class="form-control">
+					</div>
+					<div class="col-sm-6 form-group">
+						<label>Ponovno vnesite geslo</label>
+						<input type="password" name="passwordCheck" placeholder="Re-enter password" class="form-control">
+					</div>
+				</div>
+				<div class="row">
+				<div class="col-sm-4 form-group">
+
+					<label>Ime</label>
+					<input type="text" name="ime" placeholder="Ime" class="form-control">
+				</div>
+				<div class="col-sm-4 form-group">
+					<label>Priimek</label>
+						<input type="text" name="priimek" placeholder="Priimek" class="form-control">
+				</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-4 form-group">
+						<label>Naslov</label>
+							<input type="text" name="naslov" placeholder="Naslov " class="form-control">
+						</div>				
+							
+						<div class="col-sm-4 form-group">
+							<label>Poštna št.</label>
+							<input type = "text" name= "postna_st" placeholder= "Poštna Številka" class="form-control">
+						</div>
+						<div class="col-sm-4 form-group">
+							<label>Kraj</label>
+							<input type="text" name="kraj" placeholder="Kraj" class="form-control">
+						</div>
+				</div>
+			<br>
+			<button type="submit" class ="btn btn-lg btn-info" >Popravi podatke</button>
+			<br>
+
+		</form>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}

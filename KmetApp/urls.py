@@ -44,6 +44,7 @@ urlpatterns = [
 	url(r'^narocila_K_O/', views.narocila_K_O , name='narocila_K_O'),
 	url(r'^narocila_K_obdelana/' , views.narocila_K_obdelana , name='narocila_K_obdelana'),
 	url(r'^Edit/', views.Edit, name='Edit'),
-	url(r'^popraviPodatke/' , views.popraviPodatke , name='popraviPodatke')
+	url(r'^popraviPodatke/' , views.popraviPodatke , name='popraviPodatke'),
+	url(r'^oglas_view/' , views.oglas_view , name='oglas_view')
 ]
 

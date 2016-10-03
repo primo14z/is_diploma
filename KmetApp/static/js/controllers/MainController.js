@@ -2,7 +2,6 @@ app.controller('MainController', ['$scope' ,'$http', '$route',   function($scope
 
 	$scope.search = {};	
 	
-
 	$scope.iskanjeOglasa=function(){ //funkcija ki pošlje AJAX request s iskalno besedo in dobi nazaj spisek oglasov
 		$http.post("http://localhost:8000/app/iskanje_O/", $scope.search)
 		.then(function(response) {

@@ -112,6 +112,9 @@ def narocila_K_O(request):
 def Edit(request):
 	return render(request , 'accounts/Edit.html')
 
+def oglas_view(request): #request za dobit stran view_oglas
+	return render(request , 'oglas/view_oglas.html') 
+
 
 
 def oddaja_K(request): #oddaja košarice
