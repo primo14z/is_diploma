@@ -1,4 +1,4 @@
-app.controller('MainController', ['$scope' ,'$http', '$route',   function($scope, $http,$route){
+app.controller('MainController', ['$scope' ,'$http', '$route', '$window',   function($scope, $http,$route, $window){
 
 	$scope.search = {};	
 	
@@ -19,7 +19,7 @@ app.controller('MainController', ['$scope' ,'$http', '$route',   function($scope
     $scope.iskanjeKosarice=function(){//funkcija pošlje AJAX request s iskalno besedo in dobi nazaj JSON spisek košaric
         $http.post("http://localhost:8000/app/iskanje_K/", $scope.search)
         .then(function(response) {
-
+           
             $scope.kosarice = response.data.kosarice;
             
         }, function(response){
@@ -28,6 +28,27 @@ app.controller('MainController', ['$scope' ,'$http', '$route',   function($scope
 
         });
     };
+
+    $scope.oglas_view = function(e){/* za ogled oglasa v novem oknu */
+        var oglas_id = parseInt(e);
+        $scope.oglasID =parseInt(oglas_id);
+        console.log($scope.oglasID);
+        $window.open('http://localhost:8000/app/view_oglas?oglasID=' + $scope.oglasID);
+    };
+    $scope.oglas_show= function(e){/* pridobi podatke iz baze, za prikaz v novem
+                                        oknu */
+       console.log(e);
+        /*  $http.post("http://localhost:8000/app/oglas_view/" , $scope.oglasID)
+        .then(function(response){
+            
+            $scope.oglasi = response.data.oglasi;
+            console.log(response);
+
+        },function(response){
+            console.log("shieet");
+        });     */                             
+
+    }
 
     $scope.kosarica=function(){//pošlje AJAX request za vse košarice katere je oddal user in niso bile še zaključene
          $http.post("http://localhost:8000/app/kosarica_M/")

@@ -60,6 +60,7 @@ class Oglas(models.Model):
     datum_O=models.DateTimeField(default=datetime.now, blank=True)
     prodajalec_O = models.ForeignKey(User , id)
     aktiven_O = models.BooleanField(default = True)
+    slika = models.FileField(upload_to ='img/Oglas/', default='img/Oglas/default.jpg')
     
 
 class Narocilo_O(models.Model):

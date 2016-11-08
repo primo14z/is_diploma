@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
-from django.http import Http404, JsonResponse
+from django.http import Http404, JsonResponse, HttpResponse
 from django.db import models
 from django.contrib.auth import logout
 from KmetApp.models import *
@@ -8,6 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.core import serializers
 from django.db.models import Q
+from KmetApp.forms import *
+from django.utils.datastructures import MultiValueDictKeyError
 
 # Create your views here.
 def home(request):
@@ -74,6 +76,13 @@ def popraviPodatke(request):
 	user.save()
 	return render(request, 'index.html')
 
+def view_oglas(request):
+	oglasID=request.GET.get('oglasID')
+	oglas=Oglas.objects.get(pk=oglasID)
+	context = {"oglas" : oglas}
+	print (context)
+	return render(request, 'oglas/view_oglas.html' , context )
+
 def oglas(request):
 	return render(request, 'oglas/index.html')
 	
@@ -112,9 +121,15 @@ def narocila_K_O(request):
 def Edit(request):
 	return render(request , 'accounts/Edit.html')
 
+@csrf_exempt
 def oglas_view(request): #request za dobit stran view_oglas
-	return render(request , 'oglas/view_oglas.html') 
+	body_unicode = request.body.decode('utf-8')
+	body = json.loads(body_unicode)
+	oglasRaw = Oglas.objects.filter(id=int(body))
+	oglas = serializers.serialize("json", oglasRaw)
 
+	print(oglas)
+	return JsonResponse({"oglasi": oglas})
 
 
 def oddaja_K(request): #oddaja košarice
@@ -133,17 +148,15 @@ def oddaja_K(request): #oddaja košarice
 
 
 def oddaja_O(request): #oddaja oglasa
-	ime_O = request.POST.get('ime_O' , '')
-	cena_O = request.POST.get('cena', 1)
-	kolicina_O = request.POST.get('kolicina_O', 1)
-	opis_O = request.POST.get('opis_O' , '')
-	prodajalec_O=request.user
-
-	if prodajalec_O.is_authenticated:
-		oglas=Oglas.objects.create(ime_O=ime_O, cena_O=cena_O, kolicina_O=kolicina_O, opis_O=opis_O, prodajalec_O=prodajalec_O)
-	else:
-		raise Http404 ("Uporabnik ne obstaja")
-	return render(request, 'oglas/index.html')
+	form = DocumentForm(request.POST, request.FILES)
+	print(form.errors.items())
+	
+	if form.is_valid():
+		oglas=form.save(commit = False)
+		oglas.prodajalec_O = request.user
+		oglas.save()
+	
+	return render(request, 'oglas/index.html', {'form' : form})
 
 @csrf_exempt
 def iskanje_O(request): #iskanje oglasa
@@ -152,10 +165,9 @@ def iskanje_O(request): #iskanje oglasa
 	print(body)
 	if request.user.is_authenticated():
 		iskanje = Oglas.objects.filter(ime_O__icontains= body['term']).exclude(kolicina_O =0).exclude(aktiven_O = False).exclude(prodajalec_O_id=request.user )
-		print(iskanje)
 	else:
 		iskanje = Oglas.objects.filter(ime_O__icontains= body['term']).exclude(kolicina_O =0).exclude(aktiven_O = False)
-	data = [{"ime_O": ogl.ime_O, "cena_O": ogl.cena_O, "kolicina_O": ogl.kolicina_O , "opis_O": ogl.opis_O , "oglas_id" : ogl.id } for ogl in iskanje]
+	data = [{"ime_O": ogl.ime_O, "cena_O": ogl.cena_O, "kolicina_O": ogl.kolicina_O , "opis_O": ogl.opis_O , "oglas_id" : ogl.id , "slika" : ogl.slika.url} for ogl in iskanje]
 	return JsonResponse({ "oglasi" : data })
 
 @csrf_exempt

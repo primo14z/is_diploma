@@ -41,59 +41,25 @@
 
 {% endblock %}
 {% block content %}
+
  <!-- Main Content -->
     <div class="container">
-    <div class="col-lg-12 well">
-	<div class= "row"> 
-		    	
-		<form action="{% url 'KmetApp:popraviPodatke' %}" method = "POST" >
-		{% csrf_token %}
-			<div class="col-sm-12">
-				<div class="row">
-					<div class="col-sm-6 form-group">
-						<label>Geslo</label>	
-						<input type="password" name="password" placeholder="Password" class="form-control">
-					</div>
-					<div class="col-sm-6 form-group">
-						<label>Ponovno vnesite geslo</label>
-						<input type="password" name="passwordCheck" placeholder="Re-enter password" class="form-control">
-					</div>
-				</div>
-				<div class="row">
-				<div class="col-sm-4 form-group">
 
-					<label>Ime</label>
-					<input type="text" name="ime" placeholder="Ime" class="form-control">
-				</div>
-				<div class="col-sm-4 form-group">
-					<label>Priimek</label>
-						<input type="text" name="priimek" placeholder="Priimek" class="form-control">
-				</div>
-				</div>
+        <div class="row">
 
-				<div class="row">
-					<div class="col-sm-4 form-group">
-						<label>Naslov</label>
-							<input type="text" name="naslov" placeholder="Naslov " class="form-control">
-						</div>				
-							
-						<div class="col-sm-4 form-group">
-							<label>Poštna št.</label>
-							<input type = "text" name= "postna_st" placeholder= "Poštna Številka" class="form-control">
-						</div>
-						<div class="col-sm-4 form-group">
-							<label>Kraj</label>
-							<input type="text" name="kraj" placeholder="Kraj" class="form-control">
-						</div>
-				</div>
-			<br>
-			<button type="submit" class ="btn btn-lg btn-info" >Popravi podatke</button>
-			<br>
+                <div class="thumbnail">
+                   <img src="{{oglas.slika.url}}" width="750px"></img>
+                    <div class="caption-full">
+                        <h4 class="pull-right">{{oglas.cena_O}} €/kg</h4>
+                        <h4><a href="#">{{oglas.ime_O}}</a>
+                        </h4>
+                       {{oglas.opis_O}}
+                    </div>
+                  
+                </div>
+        </div>
 
-		</form>
-</div>
-</div>
-</div>
-</div>
+    </div>
+
 
 {% endblock %}

@@ -4,6 +4,66 @@
 		"selected_items":
 		[
 			[
+				"cl",
+				"cleaned_data"
+			],
+			[
+				"ko",
+				"kolicina_O"
+			],
+			[
+				"BA",
+				"BASE_DIR"
+			],
+			[
+				"fo",
+				"forms"
+			],
+			[
+				"form-",
+				"form-group"
+			],
+			[
+				"ogla",
+				"oglasID"
+			],
+			[
+				"ime",
+				"ime_O"
+			],
+			[
+				"body",
+				"body_unicode"
+			],
+			[
+				"Http",
+				"HttpResponse"
+			],
+			[
+				"bo",
+				"body_unicode"
+			],
+			[
+				"b",
+				"body_unicode"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"lo",
+				"log"
+			],
+			[
+				"oglas",
+				"oglasID"
+			],
+			[
+				"ta",
+				"target"
+			],
+			[
 				"box",
 				"box-shadow"
 			],
@@ -24,10 +84,6 @@
 				"CharField"
 			],
 			[
-				"re",
-				"request"
-			],
-			[
 				"pogos",
 				"pogostost_dostave_K"
 			],
@@ -42,10 +98,6 @@
 			[
 				"prodajalec",
 				"prodajalec_O_id"
-			],
-			[
-				"ko",
-				"kosarica_K_id"
 			],
 			[
 				"stevi",
@@ -80,16 +132,8 @@
 				"objects"
 			],
 			[
-				"ime",
-				"ime_K"
-			],
-			[
 				"r",
 				"reload"
-			],
-			[
-				"lo",
-				"location"
 			],
 			[
 				"og",
@@ -130,10 +174,6 @@
 			[
 				"pr",
 				"preventDefault"
-			],
-			[
-				"ogla",
-				"oglas"
 			],
 			[
 				"e",
@@ -180,16 +220,8 @@
 				"cena_O"
 			],
 			[
-				"bo",
-				"body"
-			],
-			[
 				"d",
 				"document"
-			],
-			[
-				"oglas",
-				"oglas_id"
 			],
 			[
 				"con",
@@ -233,7 +265,7 @@
 			],
 			[
 				"form",
-				"formaction	Attr"
+				"formaction\tAttr"
 			],
 			[
 				"q",
@@ -244,29 +276,20 @@
 	"buffers":
 	[
 		{
-			"contents": "from django.conf.urls import url, include\nfrom django.contrib import admin\nfrom . import views\n\n\napp_name='KmetApp'\n\nurlpatterns = [\n    url(r'^home/', views.home, name='home'),\n    url(r'^prijava/', views.prijava , name='prijava'),\n    url(r'^logIn/', views.logIn , name='logIn'),\n    url(r'^logOut/', views.logOut , name='logOut'),\n    url(r'^registracija/', views.registracija , name='registracija'),\n    url(r'^reg/', views.reg , name='reg'),\n    url(r'^oglas/', views.oglas , name='oglas'),\n    url(r'^oddaja_O/', views.oddaja_O , name='oddaja_O'),\n    url(r'^iskanje_O/', views.iskanje_O , name='iskanje_O'),\n    url(r'^oglas_O/', views.oglas_O , name='oglas_O'),\n    url(r'^narocilo_O/', views.narocilo_O , name='narocilo_O'),\n   	url(r'^oglas_M/', views.oglas_M , name='oglas_M'),\n   	url(r'^oglas_Edit/', views.oglas_Edit , name='oglas_Edit'),\n   	url(r'^oglas_E/', views.oglas_E , name='oglas_E'),\n    url(r'^narocilo/', views.narocilo , name='narocilo'),\n    url(r'^narocilo_IO/', views.narocilo_IO , name='narocilo_IO'),\n    url(r'^narocilo_E/', views.narocilo_E , name='narocilo_E'),\n	url(r'^narocila_N/', views.narocila_N , name='narocila_N'),\n	url(r'^narocila_M/', views.narocila_M , name='narocila_M'),	\n	url(r'^obdelaj_N/', views.obdelaj_N , name='obdelaj_N'),\n	url(r'^zakljuci_O/', views.zakljuci_O , name='zakljuci_O'),\n	url(r'^kosarica/', views.kosarica , name='kosarica'),\n	url(r'^oddaja_K/', views.oddaja_K , name='oddaja_K'),\n	url(r'^kosarica_O/', views.kosarica_O , name='kosarica_O'),\n	url(r'^iskanje_K/', views.iskanje_K , name='iskanje_K'),\n	url(r'^kosarica_E/', views.kosarica_E , name='kosarica_E'),\n	url(r'^kosarica_M/', views.kosarica_M , name='kosarica_M'),\n	url(r'^narocila_K_N/', views.narocila_K_N , name='narocila_K_N'),\n	url(r'^narocila_K_NE/', views.narocila_K_NE , name='narocila_K_NE'),\n	url(r'^narocilo_K_O/', views.narocilo_K_O , name='narocilo_K_O'),\n	url(r'^narocila_K_M/', views.narocila_K_M , name='narocila_K_M'),\n	url(r'^obdelaj_K_N/', views.obdelaj_K_N , name='obdelaj_K_N'),\n	url(r'^narocilo_Obdelano/', views.narocilo_Obdelano , name='narocilo_Obdelano'),\n	url(r'^narocila_K_Moja/', views.narocila_K_Moja , name='narocila_K_Moja'),\n	url(r'^narocila_K_O/', views.narocila_K_O , name='narocila_K_O'),\n	url(r'^narocila_K_obdelana/' , views.narocila_K_obdelana , name='narocila_K_obdelana'),\n	url(r'^Edit/', views.Edit, name='Edit'),\n	url(r'^popraviPodatke/' , views.popraviPodatke , name='popraviPodatke')\n]\n\n",
-			"file": "KmetApp/urls.py",
-			"file_size": 2507,
-			"file_write_time": 131158427424900579,
+			"file": "KmetApp/templates/oglas/view_oglas.html",
 			"settings":
 			{
-				"buffer_size": 2457,
+				"buffer_size": 1574,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "KmetSite/settings.py",
+			"file": "KmetApp/templates/oglas/add.html",
 			"settings":
 			{
-				"buffer_size": 3270,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "KmetSite/urls.py",
-			"settings":
-			{
-				"buffer_size": 841,
+				"buffer_size": 1587,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -274,15 +297,8 @@
 			"file": "KmetApp/models.py",
 			"settings":
 			{
-				"buffer_size": 3477,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "KmetApp/views.py",
-			"settings":
-			{
-				"buffer_size": 12362,
+				"buffer_size": 3569,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -290,8 +306,45 @@
 			"file": "KmetApp/templates/oglas/index.html",
 			"settings":
 			{
-				"buffer_size": 3150,
-				"line_ending": "Windows"
+				"buffer_size": 3367,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "KmetApp/static/js/controllers/MainController.js",
+			"settings":
+			{
+				"buffer_size": 9897,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "KmetApp/views.py",
+			"settings":
+			{
+				"buffer_size": 13642,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "KmetSite/settings.py",
+			"settings":
+			{
+				"buffer_size": 3375,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "KmetApp/forms.py",
+			"settings":
+			{
+				"buffer_size": 357,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -347,15 +400,38 @@
 	},
 	"expanded_folders":
 	[
-		"/C/virtualenvs/Diploma/Diplomska",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/static/css",
-		"/C/virtualenvs/Diploma/Diplomska/KmetApp/templates",
-		"/C/virtualenvs/Diploma/Diplomska/KmetSite"
+		"/C/Users/primozb/Desktop/is_diploma-master",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/__pycache__",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/migrations",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/static",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/static/css",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/static/js",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetSite",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetSite/__pycache__"
 	],
 	"file_history":
 	[
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/static/css/bootstrap.css",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/static/js/bootstrap.js",
+		"/C/Users/primozb/Desktop/is_diploma-master/startbootstrap-shop-item-gh-pages/css/bootstrap.css",
+		"/C/Users/primozb/Desktop/is_diploma-master/startbootstrap-shop-item-gh-pages/index.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/startbootstrap-shop-item-gh-pages/js/bootstrap.js",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/kosarica/index.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/migrations/0003_auto_20161031_1422.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas/add.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/models.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/urls.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/migrations/0002_auto_20161027_1424.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/views.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas/edit.html",
+		"/C/Users/primozb/Downloads/Microsoft OFFICE 2013 + activation/how to instal.nfo",
+		"/C/Users/primozb/Desktop/a.vbs",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas/index.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetSite/settings.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetSite/urls.py",
 		"/C/Users/Primo Babi/Documents/Projekt/Projekt.asm",
 		"/E/Downloads/Movies/Borderlands Pre Sequel repack Mr DJ/Instructions.txt",
 		"/C/Users/Primo Babi/AppData/Local/Temp/7zO8310C33B/build.prop",
@@ -442,6 +518,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"}}\"></",
+			"oglas",
 			"EOR",
 			"navbar-colapse",
 			"active",
@@ -494,32 +572,32 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "KmetApp/urls.py",
+					"file": "KmetApp/templates/oglas/view_oglas.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2457,
+						"buffer_size": 1574,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								141,
-								141
+								1421,
+								1421
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax"
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 645.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -527,136 +605,78 @@
 				},
 				{
 					"buffer": 1,
-					"file": "KmetSite/settings.py",
+					"file": "KmetApp/templates/oglas/add.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3270,
+						"buffer_size": 1587,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1527,
-								1523
+								1587,
+								1587
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 405.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "KmetSite/urls.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 841,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								783,
-								788
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "KmetApp/models.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3477,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2819,
-								2819
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 514.0,
+						"translation.y": 220.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "KmetApp/views.py",
+					"buffer": 2,
+					"file": "KmetApp/models.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12362,
+						"buffer_size": 3569,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4283,
-								4283
+								2040,
+								2040
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Python/Python.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1980.0,
+						"translation.y": 585.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 3,
 					"file": "KmetApp/templates/oglas/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3150,
+						"buffer_size": 3367,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1915,
-								1915
+								1995,
+								1995
 							]
 						],
 						"settings":
@@ -666,23 +686,141 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 596.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
 		},
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 4,
+					"file": "KmetApp/static/js/controllers/MainController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9897,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1148,
+								1157
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 115.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "KmetApp/views.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13642,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4344,
+								4344
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3031.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "KmetSite/settings.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3375,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								940,
+								940
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "KmetApp/forms.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 357,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								344,
+								344
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 72.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				}
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 31.0
 	},
 	"input":
 	{
@@ -708,7 +846,7 @@
 		"cols":
 		[
 			0.0,
-			0.536033609883,
+			0.476624646395,
 			1.0
 		],
 		"rows":
@@ -730,7 +868,7 @@
 	"project": "da.sublime-project",
 	"replace":
 	{
-		"height": 62.0
+		"height": 58.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -760,7 +898,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -768,7 +906,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 213.0,
+	"side_bar_width": 329.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

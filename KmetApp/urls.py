@@ -24,8 +24,7 @@ urlpatterns = [
     url(r'^narocilo_IO/', views.narocilo_IO , name='narocilo_IO'),
     url(r'^narocilo_E/', views.narocilo_E , name='narocilo_E'),
 	url(r'^narocila_N/', views.narocila_N , name='narocila_N'),
-	url(r'^narocila_M/', views.narocila_M , name='narocila_M'),
-	
+	url(r'^narocila_M/', views.narocila_M , name='narocila_M'),	
 	url(r'^obdelaj_N/', views.obdelaj_N , name='obdelaj_N'),
 	url(r'^zakljuci_O/', views.zakljuci_O , name='zakljuci_O'),
 	url(r'^kosarica/', views.kosarica , name='kosarica'),
@@ -45,6 +44,7 @@ urlpatterns = [
 	url(r'^narocila_K_obdelana/' , views.narocila_K_obdelana , name='narocila_K_obdelana'),
 	url(r'^Edit/', views.Edit, name='Edit'),
 	url(r'^popraviPodatke/' , views.popraviPodatke , name='popraviPodatke'),
-	url(r'^oglas_view/' , views.oglas_view , name='oglas_view')
+	url(r'^oglas_view/' , views.oglas_view , name='oglas_view'),
+	url(r'^view_oglas/', views.view_oglas , name = 'view_oglas')
 ]
 
