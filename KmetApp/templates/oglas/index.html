@@ -55,20 +55,22 @@
   		{% verbatim %}
  		<div class="container" ng-repeat="oglas in oglasi" >
           	
-              <img src="{{oglas.slika}}"></img>
-              <h3 class="name"><a ng-href="#" ng-click="oglas_view(oglas.oglas_id)" >{{ oglas.ime_O }} </a>
+              <img src="{{oglas.slika}}" width="250" height="250"></img>
+              <h3 class="name"><a ng-href="#" ng-click="oglas_view( oglas.pk)" >{{ oglas.ime_O }} </a>
             <div class="item col-md-12 col-md-offset-3" >
               </h3>
 	            <ul>
 	            	<li class="price" name="cena_O">  Cena izdelka: {{ oglas.cena_O }} €/kg</li>
 	           		<li class = "quantity" name="kolicina_O"> Kolicina: {{ oglas.kolicina_O }} kg </li>
+                <li class = "prodajalec"> Ime prodajalca: {{oglas.prodajalec}}</li>
+                <li class ="mesto_pridelave"> Mesto pridelave: {{oglas.mesto_pridelave}}</li>
 	           		<li class = "description"> Opis: {{ oglas.opis_O }}	</li>
-                <li class = "prodajalec"> Ime : {{oglas.prodajalec}}</li>
+                
 	            </ul>	                       	
             	<button  class ="btn btn-lg btn-info" style ="
                 font-size: 12px;
                 padding: 5px 2px;"
-    type="submit" ng-click="oglas_gumb($event)" data-oglas="{{ oglas.oglas_id }}" data-toggle="modal" data-target="#myModal" >Oddaja naročila </button>
+    type="submit" ng-click="oglas_gumb($event)" data-oglas="{{ oglas.pk }}" data-toggle="modal" data-target="#myModal" >Oddaja naročila </button>
       <br></br>
           	</div>
         </div>

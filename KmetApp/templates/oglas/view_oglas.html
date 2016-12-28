@@ -43,7 +43,7 @@
 {% block content %}
 
  <!-- Main Content -->
-    <div class="container">
+    <div class="container" ng-app = "KmetApp" ng-controller="MainController">
 
         <div class="row">
 
@@ -53,11 +53,48 @@
                         <h4 class="pull-right">{{oglas.cena_O}} €/kg</h4>
                         <h4><a href="#">{{oglas.ime_O}}</a>
                         </h4>
-                       {{oglas.opis_O}}
-                    </div>
+                        <ul>
+                    <li class = "quantity" name="kolicina_O"> Kolicina: {{ oglas.kolicina_O }} kg </li>
+                <li class = "prodajalec"> Ime prodajalca: {{oglas.prodajalec_O.ime}}</li>
+                <li class ="mesto_pridelave"> Mesto pridelave: {{oglas.mesto_pridelave}}</li>
+                </ul>     
+                      
+                       <h4> Opis produkta </h4>
+                      {{oglas.opis_O}}
+
+                    <button  class ="btn btn-lg btn-info pull-right" style ="
+                font-size: 12px;
+                padding: 5px 2px;"
+    type="submit" ng-click="oglas_gumb($event)" data-oglas="{{ oglas.pk }}" data-toggle="modal" data-target="#myModal" >Oddaja naročila
+                    </button>   
+                  </div>
                   
-                </div>
+            </div>
         </div>
+
+<form method="POST" >
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Oddaja naročila</h4>
+      </div>
+      <div class="modal-body">
+            Količina izdelka: <input type="integer" name="kolicina" id="kolicina">
+      </div>
+
+      <div class="oglas_id" display:none id="oglas_id"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <input  type="submit" class="btn btn-primary" data-dismiss="modal" ng-click= "narocilo_I()">
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</form>
+
 
     </div>
 

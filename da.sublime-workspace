@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"pro",
+				"prodajalec_K"
+			],
+			[
+				"proda",
+				"prodajalec_K"
+			],
+			[
+				"__",
+				"__init__"
+			],
+			[
+				"for",
+				"forms"
+			],
+			[
+				"og",
+				"oglasID"
+			],
+			[
+				"re",
+				"reload"
+			],
+			[
+				"loca",
+				"location"
+			],
+			[
+				"c",
+				"console"
+			],
+			[
+				"con",
+				"context"
+			],
+			[
+				"form",
+				"form-control"
+			],
+			[
+				"in",
+				"input\tTag"
+			],
+			[
 				"cl",
 				"cleaned_data"
 			],
@@ -46,10 +90,6 @@
 			[
 				"b",
 				"body_unicode"
-			],
-			[
-				"re",
-				"response"
 			],
 			[
 				"lo",
@@ -124,20 +164,12 @@
 				"narocila_K_N"
 			],
 			[
-				"pro",
-				"prodajalec_K"
-			],
-			[
 				"ob",
 				"objects"
 			],
 			[
 				"r",
 				"reload"
-			],
-			[
-				"og",
-				"oglas_id"
 			],
 			[
 				"n",
@@ -154,10 +186,6 @@
 			[
 				"ku",
 				"kupec_O_id"
-			],
-			[
-				"proda",
-				"prodajalec_O_id"
 			],
 			[
 				"oglas_O",
@@ -224,10 +252,6 @@
 				"document"
 			],
 			[
-				"con",
-				"console"
-			],
-			[
 				"koli",
 				"kolicina_N_O"
 			],
@@ -264,10 +288,6 @@
 				"Registracija"
 			],
 			[
-				"form",
-				"formaction\tAttr"
-			],
-			[
 				"q",
 				"question_text"
 			]
@@ -276,37 +296,28 @@
 	"buffers":
 	[
 		{
-			"file": "KmetApp/templates/oglas/view_oglas.html",
+			"file": "KmetApp/templates/narocilo/index_N.html",
 			"settings":
 			{
-				"buffer_size": 1574,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "KmetApp/templates/oglas/add.html",
-			"settings":
-			{
-				"buffer_size": 1587,
+				"buffer_size": 1945,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "KmetApp/models.py",
+			"file": "KmetApp/templates/narocilo/index_M.html",
 			"settings":
 			{
-				"buffer_size": 3569,
+				"buffer_size": 2143,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "KmetApp/templates/oglas/index.html",
+			"file": "KmetApp/templates/narocilo/index_O.html",
 			"settings":
 			{
-				"buffer_size": 3367,
+				"buffer_size": 3143,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -315,34 +326,19 @@
 			"file": "KmetApp/static/js/controllers/MainController.js",
 			"settings":
 			{
-				"buffer_size": 9897,
+				"buffer_size": 9755,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
+			"contents": "from django.shortcuts import render\nfrom django.contrib.auth import authenticate, login\nfrom django.http import Http404, JsonResponse, HttpResponse\nfrom django.db import models\nfrom django.contrib.auth import logout\nfrom KmetApp.models import *\nfrom django.views.decorators.csrf import csrf_exempt\nimport json\nfrom django.core import serializers\nfrom django.db.models import Q\nfrom KmetApp.forms import *\nfrom django.utils.datastructures import MultiValueDictKeyError\n\n# Create your views here.\ndef home(request):\n\treturn render(request, 'index.html')\n\ndef logOut(request):\n\tlogout(request)\n\treturn render(request, 'index.html')\n\ndef prijava(request):\n\treturn render(request , 'accounts/login.html')\n\n\ndef logIn(request):\n\temail = request.POST['email']\n\tpassword = request.POST['password']\n\tuser = authenticate(email=email, password=password)\n\tif user is not None:\n\t\tif user.is_active:\n\t\t\tlogin(request, user)\n\t\t\treturn render(request , 'index.html')\n\t\telse:\n\t\t\traise Http404 (\"Uporabnik ne obstaja\")\n\telse:\n\t\traise Http404 (\"Uporabnik \")\n\ndef reg(request):\n\treturn render(request, 'accounts/registration.html')\n\n\ndef registracija(request):\n\temail = request.POST.get('email' , '')\n\tpassword = request.POST.get('password', '')\n\time= request.POST.get('ime', '')\n\tpriimek=request.POST.get('priimek', '')\n\tnaslov=request.POST.get('naslov', '')\n\tpostna_st=request.POST.get('postna_st', '')\n\tkraj=request.POST.get('kraj', '')\n\n\tuser=User.objects.create_user(email= email, password=password)\n\tuser.ime=ime\n\tuser.priimek=priimek \n\tuser.naslov=naslov\n\tuser.postna_st=postna_st\n\tuser.kraj=kraj\n\tuser.save()\n\treturn render(request, 'accounts/login.html')\n\ndef popraviPodatke(request):\n\n\tpassword = request.POST.get('password', '')\n\time= request.POST.get('ime', '')\n\tpriimek=request.POST.get('priimek', '')\n\tnaslov=request.POST.get('naslov', '')\n\tpostna_st=request.POST.get('postna_st', '')\n\tkraj=request.POST.get('kraj', '')\n\n\tuser=User.objects.get(id=request.user.id)\n\tuser.ime=ime\n\tuser.priimek=priimek \n\tuser.naslov=naslov\n\tuser.postna_st=postna_st\n\tuser.kraj=kraj\n\tuser.save()\n\treturn render(request, 'index.html')\n\ndef view_oglas(request):#Request za videt oglas v novem oknu\n\toglasID=request.GET.get('oglasID')\n\toglas=Oglas.objects.get(pk=oglasID)\n\tcontext = {\"oglas\" : oglas}\n\treturn render(request, 'oglas/view_oglas.html' , context )\n\ndef oglas(request):\n\treturn render(request, 'oglas/index.html')\n\t\ndef oglas_O(request):\n\treturn render (request, 'oglas/add.html')\n\ndef kosarica_O(request):\n\treturn render (request, 'kosarica/add_K.html')\n\ndef oglas_M(request):\n\treturn render(request , 'oglas/edit.html')\n\ndef narocilo(request):\n\treturn render(request , 'narocilo/index_N.html')\n\ndef narocilo_IO(request):\n\treturn render(request , 'narocilo/index_O.html')\n\ndef narocilo_E(request):\n\treturn render(request , 'narocilo/index_M.html')\n\ndef kosarica(request):\n\treturn render(request, 'kosarica/index.html')\n\ndef kosarica_E(request):\n\treturn render(request , 'kosarica/edit_K.html')\n\ndef narocila_K_N(request):\n\treturn render(request ,'narocilo_K/index_N.html')\n\ndef narocila_K_M(request):\n\treturn render(request , 'narocilo_K/index_M.html')\n\ndef narocila_K_O(request):\n\treturn render(request , 'narocilo_K/index_O.html')\ndef Edit(request):\n\treturn render(request , 'accounts/Edit.html')\n\n\n\n\ndef oddaja_K(request): #oddaja košarice\n\tform = DocumentForm1(request.POST, request.FILES)\n\tprint(form.errors.items())\n\n\tif form.is_valid():\n\t\tkosarica = form.save(commit = Fales)\n\t\tkosarica.prodajalec_K = request.user\n\t\tkosarica.save()\n\treturn render(request, 'kosarica/index.html', {'form' : form})\n\n\ndef oddaja_O(request): #oddaja oglasa\n\tform = DocumentForm(request.POST, request.FILES)\n\tprint(form.errors.items())\n\t\n\tif form.is_valid():\n\t\toglas=form.save(commit = False)\n\t\toglas.prodajalec_O = request.user\n\t\toglas.save()\n\t\n\treturn render(request, 'oglas/index.html', {'form' : form})\n\n@csrf_exempt\ndef iskanje_O(request): #iskanje oglasa\n\tbody_unicode = request.body.decode('utf-8')\n\tbody = json.loads(body_unicode)\n\tprint(body)\n\tif request.user.is_authenticated():\n\t\tiskanje = Oglas.objects.filter(ime_O__icontains= body['term']).exclude(kolicina_O =0).exclude(aktiven_O = True).exclude(prodajalec_O_id=request.user )\n\telse:\n\t\tiskanje = Oglas.objects.filter(ime_O__icontains= body['term']).exclude(kolicina_O =0).exclude(aktiven_O = True)\n\tdata = [{\"ime_O\": ogl.ime_O, \"cena_O\": ogl.cena_O, \"kolicina_O\": ogl.kolicina_O , \"opis_O\": ogl.opis_O , \"pk\" : ogl.id , \"slika\" : ogl.slika.url, \"prodajalec\": ogl.prodajalec_O.ime, \"mesto_pridelave\" : ogl.mesto_pridelave } for ogl in iskanje]\n\treturn JsonResponse({ \"oglasi\" : data })\n\n@csrf_exempt\ndef iskanje_K(request): #iskanje košarice\n\tbody_unicode = request.body.decode('utf-8')\n\tbody = json.loads(body_unicode)\t\n\tif request.user.is_authenticated():\n\t\tiskanje = Kosarica.objects.exclude(kolicina_K =0).exclude(prodajalec_K_id=request.user ).exclude(stevilo_K = 0).filter(Q(opis_K__icontains =body['term']) | Q(ime_K__icontains =body['term']))\n\telse:\n\t\tiskanje = Kosarica.objects.exclude(kolicina_K =0).exclude(stevilo_K = 0).filter(Q(opis_K__icontains =body['term']) | Q(ime_K__icontains =body['term']))\n\tdata = [{\"ime_K\": ogl.ime_K, \"cena_K\": ogl.cena_K, \"kolicina_K\": ogl.kolicina_K, \"opis_K\": ogl.opis_K , \"id\" : ogl.id ,\"stevilo_K\" : ogl.stevilo_K , \"slika\" : ogl.slika.url , \"prodajalec\":ogl.prodajalec_K.ime, \"mesto_pridelave\":ogl.mesto_pridelave} for ogl in iskanje]\n\treturn JsonResponse({ \"kosarice\" : data })\n\n\t\n@csrf_exempt\ndef narocilo_O(request): #oddaja naročila za oglas\n\tbody_unicode = request.body.decode('utf-8')\n\tbody = json.loads(body_unicode)\n\tprint(body)\n\toglas = Oglas.objects.get(pk = body['id'])\n\tif request.user.is_authenticated and (oglas.kolicina_O - body['kolicina'])>=0 :\t\n\t\tcena_N_O = oglas.cena_O\n\t\tkolicina_N_O = body['kolicina']\n\t\tkupec_O_id=request.user.id\n\t\toglas_O_id=oglas.id\n\t\toglas.kolicina_O = oglas.kolicina_O - body['kolicina']\n\t\toglas.save()\n\t\tnarocilo=Narocilo_O.objects.create(cena_N_O=cena_N_O, kolicina_N_O=kolicina_N_O, kupec_O_id= kupec_O_id, oglas_O_id= oglas_O_id)\n\telse:\n\t\traise Http404 (\"Uporabnik ne obstaja\")\n\treturn JsonResponse({ \"status\" : \"true\"})\n\n@csrf_exempt\ndef narocilo_K_O(request): #oddaja naročila za košarico\n\tbody_unicode = request.body.decode('utf-8')\n\tbody = json.loads(body_unicode)\n\tprint(body)\n\tkosarica = Kosarica.objects.get(id = body['id'])\n\tprint(kosarica)\n\tif request.user.is_authenticated and (kosarica.stevilo_K - body['stevilo_K'])>0 :\t\n\t\tcena_K_N = kosarica.cena_K\n\t\tstevilo_K = body['stevilo_K']\n\t\tkupec_K_id=request.user.id\n\t\tkosarica_K_id=kosarica.id\n\t\tkosarica.stevilo_K = kosarica.stevilo_K - body['stevilo_K']\n\t\tpogostost_dostave_K =body['pogostost']\n\t\tkosarica.save()\n\t\tnarocilo=Narocilo_K.objects.create(cena_K_N=cena_K_N, stevilo_K_N = stevilo_K, kupec_K_id= kupec_K_id, kosarica_K_id= kosarica_K_id , pogostost_dostave_K = pogostost_dostave_K)\n\telse:\n\t\traise Http404 (\"Uporabnik ne obstaja\")\n\treturn JsonResponse({ \"status\" : \"true\"})\t\n\t\n\n\n\n\n@csrf_exempt\ndef oglas_Edit(request): #pregled oddanih oglasov od uporabnika\n\tuporabnik = request.user.id\t\n\toglas = Oglas.objects.filter(prodajalec_O_id = uporabnik).exclude(aktiven_O = 1)\n\tdata1 = [{\"ime_O\": ogl.ime_O, \"cena_O\": ogl.cena_O, \"kolicina_O\": ogl.kolicina_O , \"opis_O\": ogl.opis_O , \"oglas_id\" : ogl.id} for ogl in oglas]\n\tprint(data1)\n\treturn JsonResponse ({\"oglasi\" : data1})\n\n@csrf_exempt\ndef oglas_E(request):# spreiminjanje že obstoječega oglasa\n\tbody_unicode = request.body.decode('utf-8')\n\tbody = json.loads(body_unicode)\t\n\toglas = Oglas.objects.get(id = body['id'])\n\t\n\toglas.cena_O = body['cena_O']\n\toglas.ime_O = body ['ime_O']\n\toglas.kolicina_O = body ['kolicina_O']\n\toglas.opis_O = body ['opis_O']\n\toglas.save()\n\n\treturn JsonResponse({ \"status\" : \"true\"})\n\n\n\n\n@csrf_exempt\ndef narocila_N(request):#pregled oddanih naročil na obstoječi oglas, katera so neobdelana\n\tuporabnik = request.user.id\n\t\n\tnarocilo=Narocilo_O.objects.filter(oglas_O_id__prodajalec_O_id=request.user.id).order_by('datum_N_O').filter(obdelano_N_O = 0)\n\tprint(narocilo)\n\tdata = [{\"cena_N_O\": nar.cena_N_O, \"kolicina_N_O\": nar.kolicina_N_O, \"datum_N_O\": nar.datum_N_O ,\n\t \"narocilo_id\" : nar.id , \"kupec_O_id\" : User.objects.values(\"ime\").get(id = nar.kupec_O_id)[\"ime\"],\n\t \"oglas_O_id\" : nar.oglas_O_id , \"oglas_ime\" : Oglas.objects.values(\"ime_O\").get(id = nar.oglas_O_id)[\"ime_O\"]  } for nar in narocilo]\n\t\n\t\n\treturn JsonResponse({\"narocila\" : data})\n\n\n\n\n@csrf_exempt\ndef narocila_K_NE(request):#pregled prejetih naročil na košarico\n\tuporabnik = request.user.id\n\n\t\n\tnarocilo=Narocilo_K.objects.filter(kosarica_K_id__prodajalec_K_id=request.user.id).order_by('datum_K_N').filter(obdelano_N_K = 0)\n\t\n\tdata = [{\"cena_K_N\": nar.cena_K_N, \"stevilo_K_N\": nar.stevilo_K_N, \"obdelano_N_K\": nar.obdelano_N_K , \"datum_K_N\": nar.datum_K_N , \"narocilo_id\" : nar.id , \"kupec_K_id\" : User.objects.values(\"ime\").get(id = nar.kupec_K_id)[\"ime\"], \"kosarica_K_id\" : nar.kosarica_K_id , \"Kosarica_ime\" : Kosarica.objects.values(\"ime_K\").get(id = nar.kosarica_K_id)[\"ime_K\"] , \"opis_K_N\" : Kosarica.objects.values(\"opis_K\").get(id = nar.kosarica_K_id)[\"opis_K\"]  } for nar in narocilo]\n\t\n\treturn JsonResponse({\"narocila\" : data})\n\n\n\n\n@csrf_exempt\ndef narocila_M(request):#pregled oddanih naročil za oglas\n\tuporabnik = request.user.id\n\t\n\tnarocilo = Narocilo_O.objects.filter(kupec_O_id= uporabnik).order_by('datum_N_O')\n\n\tprint(narocilo)\n\n\tdata = [\n\t\t{\"cena_N_O\": nar.cena_N_O, \"kolicina_N_O\": nar.kolicina_N_O, \n\t\t \"obdelano_N_O\": nar.obdelano_N_O , \"datum_N_O\": nar.datum_N_O.strftime(\"%d.%m.%Y\") , \n\t\t \"narocilo_id\" : nar.id , \"oglas_O_id\" : nar.oglas_O_id , \n\t\t \"oglas_ime\" : nar.oglas_O.ime_O,\n\t\t \"prodajalec_O\" : nar.oglas_O.prodajalec_O.ime} for nar in narocilo]\n\tprint(data)\n\treturn JsonResponse({\"narocila\" : data})\n\t\n\n\n@csrf_exempt\ndef obdelaj_N(request):#shrani v bazo kdaj je bilo naročilo obdelano in spremeni status na obdelano --> Oglas\n\n\tbody_unicode = request.body.decode('utf-8')\n\tbody = json.loads(body_unicode)\t\n\t\n\tnarocilo =Narocilo_O.objects.get(id = body)\n\tnarocilo.obdelano_N_O = True\n\tnarocilo.datum_N_O = datetime.now\n\tnarocilo.save()\n\n\treturn JsonResponse({\"status\" : \"true\"})\n\n\n@csrf_exempt\ndef obdelaj_K_N(request):#shrani v bazo kdaj je bilo naročilo obdelano in shrani status na obdelano --> Košarica\n\n\tbody_unicode = request.body.decode('utf-8')\n\tbody = json.loads(body_unicode)\t\n\t\n\tnarocilo =Narocilo_K.objects.get(id = body)\n\tnarocilo.obdelano_N_K = True\n\tnarocilo.datum_K_N_obdelano= datetime.now\n\tnarocilo.save()\n\n\treturn JsonResponse({\"status\" : \"true\"})\n\n@csrf_exempt\ndef zakljuci_O(request):#uporabnik zaključi oglas, da ni več viden v searchu\n\tbody_unicode = request.body.decode('utf-8')\n\tbody = json.loads(body_unicode)\n\n\toglas= Oglas.objects.get(id = body)\n\toglas.aktiven_O = False\n\toglas.save()\n\n\treturn JsonResponse({\"status\" : \"true\"})\n\n@csrf_exempt\ndef kosarica_M(request):#spisek košaric kjer je user prodajalec\n\tuser = request.user.id\t\n\tkosarica = Kosarica.objects.filter(prodajalec_K= user)\n\tdata = [{\"ime_K\": ogl.ime_K, \"cena_K\": ogl.cena_K, \"kolicina_K\": ogl.kolicina_K, \"opis_K\": ogl.opis_K , \"id\" : ogl.id ,\"stevilo_K\" : ogl.stevilo_K} for ogl in kosarica]\n\treturn JsonResponse({ \"kosarice\" : data })\n\n\n@csrf_exempt\ndef narocilo_Obdelano(request):#spisek obdelanih naročil za oglas\n\tuser = request.user.id\n\tnarocila = Narocilo_O.objects.filter(oglas_O_id__prodajalec_O_id = user).exclude(obdelano_N_O = 1)\n\tdata = [{\"cena_N_O\": nar.cena_N_O, \"kolicina_N_O\": nar.kolicina_N_O, \"obdelano_N_O\": nar.obdelano_N_O , \"datum_N_O\": nar.datum_N_O , \"narocilo_id\" : nar.id , \"kupec_O_id\" : User.objects.values(\"ime\").get(id = nar.kupec_O_id)[\"ime\"], \"oglas_O_id\" : nar.oglas_O_id , \"oglas_ime\" : Oglas.objects.values(\"ime_O\").get(id = nar.oglas_O_id)[\"ime_O\"]  } for nar in narocila]\n\treturn JsonResponse({\"narocila\" : data})\n\n\n@csrf_exempt\ndef narocila_K_Moja(request):#spisek naročil kjer je user prodajalec za košarico in so neobdelana\n\tuporabnik = request.user.id\n\t\n\tnarocilo=Narocilo_K.objects.filter(kosarica_K_id__prodajalec_K_id = uporabnik).order_by('datum_K_N').filer(obdelano_N_K = 0)\n\tprint(narocilo)\n\tdata = [{\"cena_K_N\": nar.cena_K_N, \"stevilo_K_N\": nar.stevilo_K_N, \"datum_K_N\": nar.datum_K_N , \"pogostost_dostave_K\": nar.pogostost_dostave_K , \"id\" : nar.id , \"kosarica_ime\" : Kosarica.objects.values(\"ime_K\").get(id = nar.kosarica_K_id)[\"ime_K\"]  } for nar in narocilo]\n\tprint(data)\n\treturn JsonResponse({\"narocila\" : data})\n\t\n@csrf_exempt\ndef narocila_K_obdelana(request):#spisek naročil kjer je user prodajalec in so obdelana --> košarica\n\tnarocilo=Narocilo_K.objects.filter(kosarica_K_id__prodajalec_K_id=request.user.id).order_by('datum_K_N').filter(obdelano_N_K = 1)\n\t\n\tdata = [{\"cena_K_N\": nar.cena_K_N, \"stevilo_K_N\": nar.stevilo_K_N, \"obdelano_N_K\": nar.obdelano_N_K , \"datum_K_N\": nar.datum_K_N , \"narocilo_id\" : nar.id , \"kupec_K_id\" : User.objects.values(\"ime\").get(id = nar.kupec_K_id)[\"ime\"], \"kosarica_K_id\" : nar.kosarica_K_id , \"Kosarica_ime\" : Kosarica.objects.values(\"ime_K\").get(id = nar.kosarica_K_id)[\"ime_K\"] , \"opis_K_N\" : Kosarica.objects.values(\"opis_K\").get(id = nar.kosarica_K_id)[\"opis_K\"]  } for nar in narocilo]\n\t\n\treturn JsonResponse({\"narocila\" : data})\n\n\n\n\n\n\n",
 			"file": "KmetApp/views.py",
+			"file_size": 13256,
+			"file_write_time": 131260067341318736,
 			"settings":
 			{
-				"buffer_size": 13642,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "KmetSite/settings.py",
-			"settings":
-			{
-				"buffer_size": 3375,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "KmetApp/forms.py",
-			"settings":
-			{
-				"buffer_size": 357,
+				"buffer_size": 13202,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -355,10 +351,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 265.0,
-		"last_filter": "Ja",
+		"height": 173.0,
+		"last_filter": "install",
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"Ja",
 				"Set Syntax: JavaScript"
@@ -403,34 +403,41 @@
 		"/C/Users/primozb/Desktop/is_diploma-master",
 		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp",
 		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/__pycache__",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/migrations",
 		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/static",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/static/css",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/static/js",
 		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetSite",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetSite/__pycache__"
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/narocilo",
+		"/C/Users/primozb/Desktop/is_diploma-master/startbootstrap-shop-item-gh-pages"
 	],
 	"file_history":
 	[
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/urls.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/views.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas/view_oglas.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/kosarica/index.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/static/js/controllers/MainController.js",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas/index.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/kosarica/edit_K.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas/edit.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/kosarica/add_K.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/__base__.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/models.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas/add.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/forms.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/migrations/0006_auto_20161208_1340.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/migrations/0005_auto_20161208_1339.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/narocilo/index_M.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/startbootstrap-shop-item-gh-pages/index.html",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetSite/settings.py",
+		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/migrations/0004_auto_20161108_1125.py",
+		"/C/Users/primozb/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/commands.py",
 		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/static/css/bootstrap.css",
 		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/static/js/bootstrap.js",
 		"/C/Users/primozb/Desktop/is_diploma-master/startbootstrap-shop-item-gh-pages/css/bootstrap.css",
-		"/C/Users/primozb/Desktop/is_diploma-master/startbootstrap-shop-item-gh-pages/index.html",
 		"/C/Users/primozb/Desktop/is_diploma-master/startbootstrap-shop-item-gh-pages/js/bootstrap.js",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/kosarica/index.html",
 		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/migrations/0003_auto_20161031_1422.py",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas/add.html",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/models.py",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/urls.py",
 		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/migrations/0002_auto_20161027_1424.py",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/views.py",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas/edit.html",
 		"/C/Users/primozb/Downloads/Microsoft OFFICE 2013 + activation/how to instal.nfo",
 		"/C/Users/primozb/Desktop/a.vbs",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetApp/templates/oglas/index.html",
-		"/C/Users/primozb/Desktop/is_diploma-master/KmetSite/settings.py",
 		"/C/Users/primozb/Desktop/is_diploma-master/KmetSite/urls.py",
 		"/C/Users/Primo Babi/Documents/Projekt/Projekt.asm",
 		"/E/Downloads/Movies/Borderlands Pre Sequel repack Mr DJ/Instructions.txt",
@@ -518,6 +525,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"oglas",
+			"prodajalec_O",
+			"prodajalec_O ime",
+			"$console",
 			"}}\"></",
 			"oglas",
 			"EOR",
@@ -572,111 +583,24 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "KmetApp/templates/oglas/view_oglas.html",
+					"file": "KmetApp/templates/narocilo/index_N.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1574,
+						"buffer_size": 1945,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1421,
-								1421
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 645.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "KmetApp/templates/oglas/add.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1587,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1587,
-								1587
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 220.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "KmetApp/models.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3569,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2040,
-								2040
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 585.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "KmetApp/templates/oglas/index.html",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3367,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1995,
-								1995
+								570,
+								570
 							]
 						],
 						"settings":
@@ -686,7 +610,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 596.0,
+						"translation.y": 615.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -695,24 +619,84 @@
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
-					"buffer": 4,
-					"file": "KmetApp/static/js/controllers/MainController.js",
+					"buffer": 1,
+					"file": "KmetApp/templates/narocilo/index_M.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9897,
+						"buffer_size": 2143,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1148,
-								1157
+								1052,
+								1052
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 405.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "KmetApp/templates/narocilo/index_O.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3143,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "KmetApp/static/js/controllers/MainController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9755,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8201,
+								8201
 							]
 						],
 						"settings":
@@ -722,97 +706,40 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 115.0,
+						"translation.y": 3175.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 4,
 					"file": "KmetApp/views.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13642,
+						"buffer_size": 13202,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4344,
-								4344
+								8172,
+								8172
 							]
 						],
 						"settings":
 						{
+							"history_list_is_closing": true,
 							"syntax": "Packages/Python/Python.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3031.0,
+						"translation.y": 3312.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "KmetSite/settings.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3375,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								940,
-								940
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 270.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "KmetApp/forms.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 357,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								344,
-								344
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax"
-						},
-						"translation.x": 72.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -846,7 +773,7 @@
 		"cols":
 		[
 			0.0,
-			0.476624646395,
+			0.149888971133,
 			1.0
 		],
 		"rows":

@@ -48,16 +48,23 @@
   		{% verbatim %}
  		<div class="container">
           	
-          	<div class="item col-md-12 col-md-offset-3" ng-repeat="oglasa in oglase" >
-	            <h3 class="name"> {{ oglasa.ime_O }} </h3>
+          	<div class="item col-md-12 col-md-offset-3" ng-repeat="oglas in oglasi" >
+	            <h3 class="name"> {{ oglas.ime_O }} </h3>
 	            <ul>
-	            	<li class="price" name="cena_O">  Cena izdelka: {{ oglasa.cena_O }} €/kg</li>
-	           		<li class = "quantity" name="kolicina_O"> Kolicina: {{ oglasa.kolicina_O }} kg </li>
-	           		<li class = "description"> Opis: {{ oglasa.opis_O }}</li>
+	            	<li class="price" name="cena_O">  Cena izdelka: {{ oglas.cena_O }} €/kg</li>
+	           		<li class = "quantity" name="kolicina_O"> Kolicina: {{ oglas.kolicina_O }} kg </li>
+	           		<li class = "description"> Opis: {{ oglas.opis_O }}</li>
 	           		
 	            </ul>	                       	
-            	<button id ="submit1" type="submit" ng-click="narocilo($event)" data-oglas="{{ oglasa.oglas_id }}" data-toggle="modal" data-target="#myModal" >Popravek oglasa</button>
-              <button id = "submit1" data-oglas="{{ oglasa.oglas_id }}" ng-click="zakljuci_O($event)">Zaključek oglasa</button>
+            	<button id ="submit1" type="submit"  class ="btn btn-lg btn-info" 
+              style ="
+                font-size: 12px;
+                padding: 5px 2px;" 
+                ng-click="narocilo($event)" data-oglas="{{ oglas.oglas_id }}" data-toggle="modal" data-target="#myModal" >Popravek oglasa</button>
+              <button id = "submit1"   class ="btn btn-lg btn-info" style ="
+                font-size: 12px;
+                padding: 5px 2px;"
+              data-oglas="{{ oglas.oglas_id }}" ng-click="zakljuci_O($event)">Zaključek oglasa</button>
           	</div>
         </div>
         {% endverbatim %}

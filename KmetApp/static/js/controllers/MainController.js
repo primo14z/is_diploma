@@ -1,4 +1,4 @@
-app.controller('MainController', ['$scope' ,'$http', '$route', '$window',   function($scope, $http,$route, $window){
+app.controller('MainController', ['$scope' ,'$http', '$route', '$window', '$rootScope',   function($scope, $http,$route, $window, $rootScope){
 
 	$scope.search = {};	
 	
@@ -31,24 +31,15 @@ app.controller('MainController', ['$scope' ,'$http', '$route', '$window',   func
 
     $scope.oglas_view = function(e){/* za ogled oglasa v novem oknu */
         var oglas_id = parseInt(e);
-        $scope.oglasID =parseInt(oglas_id);
-        console.log($scope.oglasID);
-        $window.open('http://localhost:8000/app/view_oglas?oglasID=' + $scope.oglasID);
+        $rootScope.oglasID =parseInt(oglas_id);
+        if($window.location.pathname == "/app/view_oglas/"){
+            $window.location.reload();
+        }else{
+            $window.open('http://localhost:8000/app/view_oglas?oglasID=' + $scope.oglasID);
+        }
+        
     };
-    $scope.oglas_show= function(e){/* pridobi podatke iz baze, za prikaz v novem
-                                        oknu */
-       console.log(e);
-        /*  $http.post("http://localhost:8000/app/oglas_view/" , $scope.oglasID)
-        .then(function(response){
-            
-            $scope.oglasi = response.data.oglasi;
-            console.log(response);
-
-        },function(response){
-            console.log("shieet");
-        });     */                             
-
-    }
+   
 
     $scope.kosarica=function(){//pošlje AJAX request za vse košarice katere je oddal user in niso bile še zaključene
          $http.post("http://localhost:8000/app/kosarica_M/")
@@ -68,8 +59,8 @@ app.controller('MainController', ['$scope' ,'$http', '$route', '$window',   func
 	$scope.oglas_gumb = function(e){//funkcija pridobi ID oglasa za katerega smo hoteli oddati naročilo
 
         var oglas_id = angular.element(e.target).attr('data-oglas');
-        $scope.oglasID = parseInt(oglas_id);
-       				
+        $rootScope.oglasID = parseInt(oglas_id);      				
+        console.log($scope.oglasID);
               };
 
     $scope.zakljuci_O = function(e){/*funkcija pridobi ID oglasa katerega želimo zaključiti, ter pošlje AJAX request v katerem 
@@ -90,22 +81,24 @@ app.controller('MainController', ['$scope' ,'$http', '$route', '$window',   func
 
    
 
-    $scope.narocilo_I=function(){/*funkcija pridobi ID oglasa ter količino katero smo vnesli ob oddaji naročila, ter posreduje view
+    $scope.narocilo_I=function(e){/*funkcija pridobi ID oglasa ter količino katero smo vnesli ob oddaji naročila, ter posreduje view
                                  kateri vnese v bazo*/
     	var kolicina = parseInt(angular.element(document.querySelector('#kolicina')).val());
-    	
        	var narocilo = {
-	    	id : $scope.oglasID,
+	    	id : $rootScope.oglasID,
 	    	kolicina  : kolicina
     	};
-
+        console.log(narocilo);
         $http.post("http://localhost:8000/app/narocilo_O/", narocilo)
         .then(function(response){
 
         	
         	$scope.status = response.data.status;
         	console.log($scope.status);
-
+            if($window.location.pathname == "/app/view_oglas/"){
+                $scope.oglas_view($scope.oglasID);
+            }
+           
         }, function(response){
 
         	console.log("shit went wrong");
@@ -146,8 +139,8 @@ $scope.narocilo_K=function(){/*funkcija dobi ID ter količino katero smo vnesli 
     	$http.post("http://localhost:8000/app/oglas_Edit/")
     	.then(function(response){
     		
-	    		$scope.oglase = response.data.oglase;
-	    		console.log($scope.oglase);
+	    		$scope.oglasi = response.data.oglasi;
+	    		console.log($scope.oglasi);
 
 
     	}, function(response){

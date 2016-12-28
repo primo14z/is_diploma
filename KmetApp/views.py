@@ -76,11 +76,10 @@ def popraviPodatke(request):
 	user.save()
 	return render(request, 'index.html')
 
-def view_oglas(request):
+def view_oglas(request):#Request za videt oglas v novem oknu
 	oglasID=request.GET.get('oglasID')
 	oglas=Oglas.objects.get(pk=oglasID)
 	context = {"oglas" : oglas}
-	print (context)
 	return render(request, 'oglas/view_oglas.html' , context )
 
 def oglas(request):
@@ -121,30 +120,18 @@ def narocila_K_O(request):
 def Edit(request):
 	return render(request , 'accounts/Edit.html')
 
-@csrf_exempt
-def oglas_view(request): #request za dobit stran view_oglas
-	body_unicode = request.body.decode('utf-8')
-	body = json.loads(body_unicode)
-	oglasRaw = Oglas.objects.filter(id=int(body))
-	oglas = serializers.serialize("json", oglasRaw)
 
-	print(oglas)
-	return JsonResponse({"oglasi": oglas})
 
 
 def oddaja_K(request): #oddaja košarice
-	ime_K = request.POST.get('ime_K' , '')
-	cena_K = request.POST.get('cena_K', 1)
-	kolicina_K = request.POST.get('kolicina_K', 1)
-	opis_K = request.POST.get('opis_K' , '')
-	stevilo_K = request.POST.get('stevilo_K', 1)
-	prodajalec_K=request.user
+	form = DocumentForm1(request.POST, request.FILES)
+	print(form.errors.items())
 
-	if prodajalec_K.is_authenticated:
-		kosarica=Kosarica.objects.create(ime_K=ime_K, cena_K=cena_K, kolicina_K=kolicina_K, opis_K=opis_K, prodajalec_K=prodajalec_K, stevilo_K = stevilo_K)
-	else:
-		raise Http404 ("Uporabnik ne obstaja")
-	return render(request, 'kosarica/index.html')
+	if form.is_valid():
+		kosarica = form.save(commit = Fales)
+		kosarica.prodajalec_K = request.user
+		kosarica.save()
+	return render(request, 'kosarica/index.html', {'form' : form})
 
 
 def oddaja_O(request): #oddaja oglasa
@@ -164,10 +151,10 @@ def iskanje_O(request): #iskanje oglasa
 	body = json.loads(body_unicode)
 	print(body)
 	if request.user.is_authenticated():
-		iskanje = Oglas.objects.filter(ime_O__icontains= body['term']).exclude(kolicina_O =0).exclude(aktiven_O = False).exclude(prodajalec_O_id=request.user )
+		iskanje = Oglas.objects.filter(ime_O__icontains= body['term']).exclude(kolicina_O =0).exclude(aktiven_O = True).exclude(prodajalec_O_id=request.user )
 	else:
-		iskanje = Oglas.objects.filter(ime_O__icontains= body['term']).exclude(kolicina_O =0).exclude(aktiven_O = False)
-	data = [{"ime_O": ogl.ime_O, "cena_O": ogl.cena_O, "kolicina_O": ogl.kolicina_O , "opis_O": ogl.opis_O , "oglas_id" : ogl.id , "slika" : ogl.slika.url} for ogl in iskanje]
+		iskanje = Oglas.objects.filter(ime_O__icontains= body['term']).exclude(kolicina_O =0).exclude(aktiven_O = True)
+	data = [{"ime_O": ogl.ime_O, "cena_O": ogl.cena_O, "kolicina_O": ogl.kolicina_O , "opis_O": ogl.opis_O , "pk" : ogl.id , "slika" : ogl.slika.url, "prodajalec": ogl.prodajalec_O.ime, "mesto_pridelave" : ogl.mesto_pridelave } for ogl in iskanje]
 	return JsonResponse({ "oglasi" : data })
 
 @csrf_exempt
@@ -178,15 +165,16 @@ def iskanje_K(request): #iskanje košarice
 		iskanje = Kosarica.objects.exclude(kolicina_K =0).exclude(prodajalec_K_id=request.user ).exclude(stevilo_K = 0).filter(Q(opis_K__icontains =body['term']) | Q(ime_K__icontains =body['term']))
 	else:
 		iskanje = Kosarica.objects.exclude(kolicina_K =0).exclude(stevilo_K = 0).filter(Q(opis_K__icontains =body['term']) | Q(ime_K__icontains =body['term']))
-	data = [{"ime_K": ogl.ime_K, "cena_K": ogl.cena_K, "kolicina_K": ogl.kolicina_K, "opis_K": ogl.opis_K , "id" : ogl.id ,"stevilo_K" : ogl.stevilo_K} for ogl in iskanje]
+	data = [{"ime_K": ogl.ime_K, "cena_K": ogl.cena_K, "kolicina_K": ogl.kolicina_K, "opis_K": ogl.opis_K , "id" : ogl.id ,"stevilo_K" : ogl.stevilo_K , "slika" : ogl.slika.url , "prodajalec":ogl.prodajalec_K.ime, "mesto_pridelave":ogl.mesto_pridelave} for ogl in iskanje]
 	return JsonResponse({ "kosarice" : data })
 
 	
 @csrf_exempt
 def narocilo_O(request): #oddaja naročila za oglas
 	body_unicode = request.body.decode('utf-8')
-	body = json.loads(body_unicode)	
-	oglas = Oglas.objects.get(id = body['id'])
+	body = json.loads(body_unicode)
+	print(body)
+	oglas = Oglas.objects.get(pk = body['id'])
 	if request.user.is_authenticated and (oglas.kolicina_O - body['kolicina'])>=0 :	
 		cena_N_O = oglas.cena_O
 		kolicina_N_O = body['kolicina']
@@ -226,10 +214,10 @@ def narocilo_K_O(request): #oddaja naročila za košarico
 @csrf_exempt
 def oglas_Edit(request): #pregled oddanih oglasov od uporabnika
 	uporabnik = request.user.id	
-	oglas = Oglas.objects.filter(prodajalec_O_id = uporabnik).exclude(aktiven_O = 0)
+	oglas = Oglas.objects.filter(prodajalec_O_id = uporabnik).exclude(aktiven_O = 1)
 	data1 = [{"ime_O": ogl.ime_O, "cena_O": ogl.cena_O, "kolicina_O": ogl.kolicina_O , "opis_O": ogl.opis_O , "oglas_id" : ogl.id} for ogl in oglas]
-	
-	return JsonResponse ({"oglase" : data1})
+	print(data1)
+	return JsonResponse ({"oglasi" : data1})
 
 @csrf_exempt
 def oglas_E(request):# spreiminjanje že obstoječega oglasa
@@ -280,9 +268,16 @@ def narocila_K_NE(request):#pregled prejetih naročil na košarico
 def narocila_M(request):#pregled oddanih naročil za oglas
 	uporabnik = request.user.id
 	
-	narocilo=Narocilo_O.objects.filter(kupec_O_id= uporabnik).order_by('datum_N_O')
+	narocilo = Narocilo_O.objects.filter(kupec_O_id= uporabnik).order_by('datum_N_O')
+
 	print(narocilo)
-	data = [{"cena_N_O": nar.cena_N_O, "kolicina_N_O": nar.kolicina_N_O, "obdelano_N_O": nar.obdelano_N_O , "datum_N_O": nar.datum_N_O , "narocilo_id" : nar.id , "kupec_O_id" : User.objects.values("ime").get(id = nar.kupec_O_id)["ime"], "oglas_O_id" : nar.oglas_O_id , "oglas_ime" : Oglas.objects.values("ime_O").get(id = nar.oglas_O_id)["ime_O"]  } for nar in narocilo]
+
+	data = [
+		{"cena_N_O": nar.cena_N_O, "kolicina_N_O": nar.kolicina_N_O, 
+		 "obdelano_N_O": nar.obdelano_N_O , "datum_N_O": nar.datum_N_O.strftime("%d.%m.%Y") , 
+		 "narocilo_id" : nar.id , "oglas_O_id" : nar.oglas_O_id , 
+		 "oglas_ime" : nar.oglas_O.ime_O,
+		 "prodajalec_O" : nar.oglas_O.prodajalec_O.ime} for nar in narocilo]
 	print(data)
 	return JsonResponse({"narocila" : data})
 	

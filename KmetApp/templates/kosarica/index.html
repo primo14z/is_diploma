@@ -55,16 +55,23 @@
  		<div class="container">
           	
           	<div class="item col-md-12 col-md-offset-3" ng-repeat="kosarica in kosarice" >
+             <img src="{{oglas.slika}}" width="250" height="250"></img>
 	            <h3 class="name"> {{ kosarica.ime_K }} </h3>
 	            <ul>
-	            	<li class="price" name="cena_K">  Cena izdelka: {{ kosarica.cena_K }} €/kg</li>
+	            	<li class="price" name="cena_K">  Cena izdelka: {{ kosarica.cena_K }} €/košarica</li>
 	           		<li class = "quantity" name="kolicina_K"> Kolicina: {{ kosarica.kolicina_K }} kg </li>
-	           		<li class = "description"> Opis: {{ kosarica.opis_K }}	</li>
                 <li class = "kolicina" > Stevilo košaric: {{ kosarica.stevilo_K }}</li>
+                <li class = "prodajalec"> Ime prodajalca: {{kosarica.prodajalec}}</li>
+                <li class ="mesto_pridelave"> Mesto pridelave: {{kosarica.mesto_pridelave}}</li>
+	           		<li class = "description"> Opis: {{ kosarica.opis_K }}	</li>
+                
                 
 	           		
 	            </ul>	                       	
-            	<input id ="submit1" type="submit" ng-click="oglas_gumb($event)" data-oglas="{{ kosarica.id }}" data-toggle="modal" data-target="#myModal" >
+            	<input id ="submit1"  class ="btn btn-lg btn-info" style ="
+                font-size: 12px;
+                padding: 5px 2px;"
+                type="submit" ng-click="oglas_gumb($event)" data-oglas="{{ kosarica.id }}" data-toggle="modal" data-target="#myModal" >
           	</div>
         </div>
         {% endverbatim %}

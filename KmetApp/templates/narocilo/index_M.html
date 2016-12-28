@@ -58,48 +58,20 @@
               <ul>
                 <li class="price" name="cena_O">  Cena izdelka: {{ narocilo.cena_N_O }} €/kg</li>
                 <li class = "quantity" name="kolicina_O"> Kolicina: {{ narocilo.kolicina_N_O }} kg </li>
-                <li class = "description"> Opis: {{ narocilo.kupec_O_id }}</li>
+                <li class = "prodajalec" name="prodajalec_O"> Prodajalec: {{narocilo.prodajalec_O}}
+                <li class = "datum" name= "datum">Datum oddaje: {{narocilo.datum_N_O}}
+                 <li class = "obdelano" name="obdelano">
+                <div ng-if="narocilo.obdelano_N_O == false">
+                Status naročila: Neobdelano
+                </div>
+                <div ng-if="narocilo.obdelano_N_O  != false">
+                Status naročila: Obdelano
+                </div>
                 
               </ul>                         
-              <input id ="submit1" type="submit" ng-click="narocilo_gumb($event)" data-narocilo="{{ narocilo.narocilo_id }}" data-toggle="modal" data-target="#myModal" >
             </div>
         </div>
         {% endverbatim %}
     </div>
-
-  
-
-
-
-<form method="POST" >
-<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Obdelava naročila</h4>
-      </div>
-      <div class="modal-body">
-            <ul>
-              <li>Ime oglasa: <input type="text" name="ime_O" id="ime_O"></li>           
-                <li>Cena izdelka: <input type="integer" id ="cena_O">€/kg</li>
-                <li>Količina izdelka: <input type="integer" name="kolicina" id="kolicina_O"></li>
-                <li>Opis: <input type="text" id="opis_O"></li>
-              </ul>
-           
-      </div>
-
-      <div class="oglas_id" display:none id="oglas_id"></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <input  type="submit" class="btn btn-primary" data-dismiss="modal" ng-click= "oglas_E()">
-        
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-</form>
-
-
 
 {% endblock %}

@@ -61,7 +61,7 @@ class Oglas(models.Model):
     prodajalec_O = models.ForeignKey(User , id)
     aktiven_O = models.BooleanField(default = True)
     slika = models.FileField(upload_to ='img/Oglas/', default='img/Oglas/default.jpg')
-    
+    mesto_pridelave = models.CharField(max_length= 50, default='')
 
 class Narocilo_O(models.Model):
     cena_N_O = models.IntegerField()
@@ -79,6 +79,10 @@ class Kosarica(models.Model):
     stevilo_K = models.IntegerField()
     opis_K = models.CharField(max_length = 200)
     prodajalec_K = models.ForeignKey(User, id)
+    datum_K=models.DateTimeField(default=datetime.now, blank=True)
+    aktiven_K = models.BooleanField(default = True)
+    slika = models.FileField(upload_to ='img/Kosarica/', default='img/Kosarica/default.jpg')
+    mesto_pridelave = models.CharField(max_length= 50, default='')
 
 class Narocilo_K(models.Model):
     cena_K_N = models.IntegerField()
