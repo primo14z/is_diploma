@@ -56,10 +56,13 @@
               <ul>
                 <li class="price" name="cena_O">  Cena izdelka: {{ narocilo.cena_N_O }} €/kg</li>
                 <li class = "quantity" name="kolicina_O"> Kolicina: {{ narocilo.kolicina_N_O }} kg </li>
-                <li class = "description"> Opis: {{ narocilo.kupec_O_id }}</li>
+                <li class = "description"> Ime kupca: {{ narocilo.kupec_O_ime }}</li>
+                <li class="datum"> Datum oddaje naročila: {{datum_N_O}}
                 
               </ul>                         
-              <button id ="submit1" type="submit" ng-click="narocilo_gumb($event)" data-narocilo="{{ narocilo.narocilo_id }}" data-toggle="modal" data-target="#myModal" >Zaključi naročilo </button>
+              <button class ="btn btn-lg btn-info" style ="
+                font-size: 12px;
+                padding: 5px 2px;" id ="submit1" type="submit" ng-click="narocilo_gumb($event)" data-narocilo="{{ narocilo.narocilo_id }}" data-toggle="modal" data-target="#myModal" >Zaključi naročilo </button><br><br>
             </div>
         </div>
         {% endverbatim %}

@@ -48,10 +48,12 @@ def registracija(request):
 	naslov=request.POST.get('naslov', '')
 	postna_st=request.POST.get('postna_st', '')
 	kraj=request.POST.get('kraj', '')
+	telefonska=request.POST.get('telefonska', '')
 
 	user=User.objects.create_user(email= email, password=password)
 	user.ime=ime
 	user.priimek=priimek 
+	user.telefonska=telefonska
 	user.naslov=naslov
 	user.postna_st=postna_st
 	user.kraj=kraj
@@ -66,12 +68,13 @@ def popraviPodatke(request):
 	naslov=request.POST.get('naslov', '')
 	postna_st=request.POST.get('postna_st', '')
 	kraj=request.POST.get('kraj', '')
-
+	telefonska=request.POST.get('telefonska', '')
 	user=User.objects.get(id=request.user.id)
 	user.ime=ime
 	user.priimek=priimek 
 	user.naslov=naslov
 	user.postna_st=postna_st
+	user.telefonska=telefonska
 	user.kraj=kraj
 	user.save()
 	return render(request, 'index.html')
@@ -180,6 +183,7 @@ def narocilo_O(request): #oddaja naročila za oglas
 		kolicina_N_O = body['kolicina']
 		kupec_O_id=request.user.id
 		oglas_O_id=oglas.id
+		datum_N_O = datetime.now
 		oglas.kolicina_O = oglas.kolicina_O - body['kolicina']
 		oglas.save()
 		narocilo=Narocilo_O.objects.create(cena_N_O=cena_N_O, kolicina_N_O=kolicina_N_O, kupec_O_id= kupec_O_id, oglas_O_id= oglas_O_id)
@@ -215,9 +219,8 @@ def narocilo_K_O(request): #oddaja naročila za košarico
 def oglas_Edit(request): #pregled oddanih oglasov od uporabnika
 	uporabnik = request.user.id	
 	oglas = Oglas.objects.filter(prodajalec_O_id = uporabnik).exclude(aktiven_O = 1)
-	data1 = [{"ime_O": ogl.ime_O, "cena_O": ogl.cena_O, "kolicina_O": ogl.kolicina_O , "opis_O": ogl.opis_O , "oglas_id" : ogl.id} for ogl in oglas]
-	print(data1)
-	return JsonResponse ({"oglasi" : data1})
+	data = [{"ime_O": ogl.ime_O, "cena_O": ogl.cena_O, "kolicina_O": ogl.kolicina_O , "opis_O": ogl.opis_O , "pk" : ogl.id , "slika" : ogl.slika.url, "prodajalec": ogl.prodajalec_O.ime, "mesto_pridelave" : ogl.mesto_pridelave } for ogl in oglas]
+	return JsonResponse ({"oglasi" : data})
 
 @csrf_exempt
 def oglas_E(request):# spreiminjanje že obstoječega oglasa
@@ -242,8 +245,9 @@ def narocila_N(request):#pregled oddanih naročil na obstoječi oglas, katera so
 	
 	narocilo=Narocilo_O.objects.filter(oglas_O_id__prodajalec_O_id=request.user.id).order_by('datum_N_O').filter(obdelano_N_O = 0)
 	print(narocilo)
-	data = [{"cena_N_O": nar.cena_N_O, "kolicina_N_O": nar.kolicina_N_O, "obdelano_N_O": nar.obdelano_N_O , "datum_N_O": nar.datum_N_O , "narocilo_id" : nar.id , "kupec_O_id" : User.objects.values("ime").get(id = nar.kupec_O_id)["ime"], "oglas_O_id" : nar.oglas_O_id , "oglas_ime" : Oglas.objects.values("ime_O").get(id = nar.oglas_O_id)["ime_O"]  } for nar in narocilo]
-	
+	data = [{"cena_N_O": nar.cena_N_O, "kolicina_N_O": nar.kolicina_N_O, "datum_N_O": nar.datum_N_O ,
+	 "narocilo_id" : nar.id , "kupec_O_ime" : User.objects.values("ime").get(id = nar.kupec_O_id)["ime"],
+	 "oglas_O_id" : nar.oglas_O_id , "oglas_ime" : Oglas.objects.values("ime_O").get(id = nar.oglas_O_id)["ime_O"]} for nar in narocilo]
 	
 	return JsonResponse({"narocila" : data})
 

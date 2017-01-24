@@ -219,7 +219,6 @@ $scope.narocilo_K=function(){/*funkcija dobi ID ter količino katero smo vnesli 
         var narocilo_id = angular.element(e.target).attr('data-narocilo');
         $scope.narociloID = parseInt(narocilo_id);
         
-
         $http.post("http://localhost:8000/app/obdelaj_N/" , $scope.narociloID)
         .then(function(response){
             window.location.reload();        

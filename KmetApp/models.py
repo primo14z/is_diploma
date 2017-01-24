@@ -40,7 +40,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     naslov = models.CharField(max_length=50)
     postna_st = models.IntegerField()
     kraj = models.CharField(max_length=50)
- 
+    telefonska=models.CharField(max_length = 20, default='')
     objects = CustomUserManager()
  
     is_active = models.BooleanField(default=True)

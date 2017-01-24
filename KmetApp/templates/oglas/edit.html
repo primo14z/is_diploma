@@ -49,13 +49,18 @@
  		<div class="container">
           	
           	<div class="item col-md-12 col-md-offset-3" ng-repeat="oglas in oglasi" >
-	            <h3 class="name"> {{ oglas.ime_O }} </h3>
-	            <ul>
-	            	<li class="price" name="cena_O">  Cena izdelka: {{ oglas.cena_O }} €/kg</li>
-	           		<li class = "quantity" name="kolicina_O"> Kolicina: {{ oglas.kolicina_O }} kg </li>
-	           		<li class = "description"> Opis: {{ oglas.opis_O }}</li>
-	           		
-	            </ul>	                       	
+              <img src="{{oglas.slika}}" width="250" height="250"></img>
+              <h3 class="name"><a ng-href="#" ng-click="oglas_view( oglas.pk)" >{{ oglas.ime_O }} </a>
+            <div class="item col-md-12 col-md-offset-3" >
+              </h3>
+              <ul>
+                <li class="price" name="cena_O">  Cena izdelka: {{ oglas.cena_O }} €/kg</li>
+                <li class = "quantity" name="kolicina_O"> Kolicina: {{ oglas.kolicina_O }} kg </li>
+                <li class = "prodajalec"> Ime prodajalca: {{oglas.prodajalec}}</li>
+                <li class ="mesto_pridelave"> Mesto pridelave: {{oglas.mesto_pridelave}}</li>
+                <li class = "description"> Opis: {{ oglas.opis_O }} </li>
+                
+              </ul>                      	
             	<button id ="submit1" type="submit"  class ="btn btn-lg btn-info" 
               style ="
                 font-size: 12px;
@@ -64,7 +69,7 @@
               <button id = "submit1"   class ="btn btn-lg btn-info" style ="
                 font-size: 12px;
                 padding: 5px 2px;"
-              data-oglas="{{ oglas.oglas_id }}" ng-click="zakljuci_O($event)">Zaključek oglasa</button>
+              data-oglas="{{ oglas.oglas_id }}" ng-click="zakljuci_O($event)">Zaključek oglasa</button> <br /><br /><br /><br />
           	</div>
         </div>
         {% endverbatim %}
@@ -84,6 +89,9 @@
 	            	<li>Cena izdelka: <input type="integer" id ="cena_O">€/kg</li>
 	            	<li>Količina izdelka: <input type="integer" name="kolicina" id="kolicina_O"></li>
 	           		<li>Opis: <input type="text" id="opis_O"></li>
+                <div class="form-group">
+                <li><input id="slika" type="file" name="slika"></li>
+                </div>
 	           	</ul>
 	         
       </div>
